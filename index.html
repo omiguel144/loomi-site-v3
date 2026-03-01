@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loomi — Natural Fiber Clothing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Local images served from /images/ -->
+  <!-- Display serif (Cormorant Garamond) + UI sans-serif (DM Sans) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Loomi is a curated index of natural fiber clothing — 90%+ natural in every listing. Cotton, linen, merino wool, cashmere, silk and hemp, from verified brands." />
+  <meta property="og:title" content="Loomi — Natural Fiber Clothing" />
+  <meta property="og:description" content="90%+ natural fibers. Every listing checked. Browse clothing from certified natural fiber brands." />
+  <meta property="og:type" content="website" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","name":"Loomi","url":"https://loomi.com/","description":"Natural fiber clothing curated to a 90% purity standard.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://loomi.com/search/?q={search_term_string}"},"query-input":"required name=search_term_string"}}
+  </script>
+
+  <style>
+    /* ─── HOMEPAGE OVERRIDES ─────────────────────────────────────────
+       Rules here are intentional overrides of styles.css for the
+       static homepage nav and fiber chart. All other styles are
+       handled by styles.css. Do not duplicate design tokens here.
+    ──────────────────────────────────────────────────────────────── */
+
+    /* Homepage static nav uses opacity fade instead of border-bottom */
+    .nav-link { transition: opacity 0.15s ease; text-decoration: none; }
+    .nav-link:hover { opacity: 0.45; }
+
+    /* Homepage fiber chart — segmented style with gaps and shadows */
+    .fiber-chart-bars {
+      display: flex;
+      gap: 3px;
+      height: 32px;
+      border-radius: 0;
+      overflow: visible;
+    }
+    .fiber-chart-seg {
+      flex-shrink: 0;
+      min-width: 22px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .fiber-chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px 8px;
+      margin-top: 5px;
+      overflow: visible;
+    }
+
+    /* Homepage section label — uppercase tracking style */
+    .section-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════ -->
+<a href="#loomi-main" class="skip-to-main">Skip to main content</a>
+<nav class="sticky top-0 z-50" style="background:var(--bg);">
+  <div class="flex items-center h-11 px-5 gap-7">
+
+    <!-- Logo: left, serif, Title Case -->
+    <a href="/" class="nav-link flex-shrink-0 serif" style="font-size:26px;font-weight:500;color:var(--text);letter-spacing:0.01em;">Loomi</a>
+
+    <!-- Primary categories: lowercase, 11px, sans-serif -->
+    <div class="hidden md:flex items-center gap-6 flex-1">
+
+      <!-- new mega-nav -->
+      <div class="mega-nav-item flex items-center">
+        <a href="new/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">new</a>
+        <div class="mega-menu">
+          <div class="mega-menu-grid">
+            <div class="mega-col">
+              <span class="mega-col-heading">new in</span>
+              <a href="new/" role="menuitem">all new arrivals</a>
+              <a href="women/new-arrivals/" role="menuitem">women's new</a>
+              <a href="men/new-arrivals/" role="menuitem">men's new</a>
+              <a href="kids/new-arrivals/" role="menuitem">kids' new</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">trending</span>
+              <a href="women/best-sellers/" role="menuitem">women's best sellers</a>
+              <a href="men/best-sellers/" role="menuitem">men's best sellers</a>
+              <a href="kids/best-sellers/" role="menuitem">kids' best sellers</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">by fiber</span>
+              <a href="fibers/cotton/" role="menuitem">cotton</a>
+              <a href="fibers/linen/" role="menuitem">linen</a>
+              <a href="fibers/merino-wool/" role="menuitem">merino wool</a>
+              <a href="fibers/cashmere/" role="menuitem">cashmere</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">sale</span>
+              <a href="women/sale/" role="menuitem">women's sale</a>
+              <a href="men/sale/" role="menuitem">men's sale</a>
+              <a href="kids/sale/" role="menuitem">kids' sale</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- women mega-nav -->
+      <div class="mega-nav-item flex items-center">
+        <a href="women/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">women</a>
+        <div class="mega-menu">
+          <div class="mega-menu-grid">
+            <div class="mega-col">
+              <span class="mega-col-heading">women's</span>
+              <a href="women/new-arrivals/" role="menuitem">new arrivals</a>
+              <a href="women/best-sellers/" role="menuitem">best sellers</a>
+              <a href="women/sale/" role="menuitem">sale</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">clothing</span>
+              <a href="women/tops/" role="menuitem">tops &amp; tees</a>
+              <a href="women/dresses/" role="menuitem">dresses</a>
+              <a href="women/trousers/" role="menuitem">trousers</a>
+              <a href="women/knitwear/" role="menuitem">knitwear</a>
+              <a href="women/outerwear/" role="menuitem">outerwear</a>
+              <a href="women/sleepwear/" role="menuitem">sleepwear</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">by fiber</span>
+              <a href="fibers/cotton/" role="menuitem">cotton</a>
+              <a href="fibers/linen/" role="menuitem">linen</a>
+              <a href="fibers/merino-wool/" role="menuitem">merino wool</a>
+              <a href="fibers/cashmere/" role="menuitem">cashmere</a>
+              <a href="fibers/silk/" role="menuitem">silk</a>
+              <a href="fibers/hemp/" role="menuitem">hemp</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">brands</span>
+              <a href="brands/pact/" role="menuitem">pact</a>
+              <a href="brands/kotn/" role="menuitem">kotn</a>
+              <a href="brands/thought/" role="menuitem">thought</a>
+              <a href="brands/eileen-fisher/" role="menuitem">eileen fisher</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- men mega-nav -->
+      <div class="mega-nav-item flex items-center">
+        <a href="men/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">men</a>
+        <div class="mega-menu">
+          <div class="mega-menu-grid">
+            <div class="mega-col">
+              <span class="mega-col-heading">men's</span>
+              <a href="men/new-arrivals/" role="menuitem">new arrivals</a>
+              <a href="men/best-sellers/" role="menuitem">best sellers</a>
+              <a href="men/sale/" role="menuitem">sale</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">clothing</span>
+              <a href="men/t-shirts-tops/" role="menuitem">t-shirts &amp; tops</a>
+              <a href="men/shirts/" role="menuitem">shirts</a>
+              <a href="men/trousers/" role="menuitem">trousers</a>
+              <a href="men/knitwear/" role="menuitem">knitwear</a>
+              <a href="men/outerwear/" role="menuitem">outerwear</a>
+              <a href="men/underwear/" role="menuitem">underwear</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">by fiber</span>
+              <a href="fibers/cotton/" role="menuitem">cotton</a>
+              <a href="fibers/linen/" role="menuitem">linen</a>
+              <a href="fibers/merino-wool/" role="menuitem">merino wool</a>
+              <a href="fibers/cashmere/" role="menuitem">cashmere</a>
+              <a href="fibers/hemp/" role="menuitem">hemp</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">brands</span>
+              <a href="brands/pact/" role="menuitem">pact</a>
+              <a href="brands/kotn/" role="menuitem">kotn</a>
+              <a href="brands/thought/" role="menuitem">thought</a>
+              <a href="brands/finisterre/" role="menuitem">finisterre</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- kids mega-nav -->
+      <div class="mega-nav-item flex items-center">
+        <a href="kids/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">kids</a>
+        <div class="mega-menu">
+          <div class="mega-menu-grid">
+            <div class="mega-col">
+              <span class="mega-col-heading">kids'</span>
+              <a href="kids/new-arrivals/" role="menuitem">new arrivals</a>
+              <a href="kids/best-sellers/" role="menuitem">best sellers</a>
+              <a href="kids/sale/" role="menuitem">sale</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">clothing</span>
+              <a href="kids/tops/" role="menuitem">tops</a>
+              <a href="kids/bottoms/" role="menuitem">bottoms</a>
+              <a href="kids/sets/" role="menuitem">sets</a>
+              <a href="kids/outerwear/" role="menuitem">outerwear</a>
+              <a href="kids/sleepwear/" role="menuitem">sleepwear</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">by fiber</span>
+              <a href="fibers/cotton/" role="menuitem">cotton</a>
+              <a href="fibers/linen/" role="menuitem">linen</a>
+              <a href="fibers/merino-wool/" role="menuitem">merino wool</a>
+              <a href="fibers/cashmere/" role="menuitem">cashmere</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">brands</span>
+              <a href="brands/pact/" role="menuitem">pact</a>
+              <a href="brands/kotn/" role="menuitem">kotn</a>
+              <a href="brands/thought/" role="menuitem">thought</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- fibers mega-nav -->
+      <div class="mega-nav-item flex items-center">
+        <a href="fibers/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">fibers</a>
+        <div class="mega-menu">
+          <div class="mega-menu-grid">
+            <div class="mega-col">
+              <span class="mega-col-heading">natural fibers</span>
+              <a href="fibers/" role="menuitem">all fibers</a>
+              <a href="fibers/cotton/" role="menuitem">cotton</a>
+              <a href="fibers/linen/" role="menuitem">linen</a>
+              <a href="fibers/merino-wool/" role="menuitem">merino wool</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">luxury fibers</span>
+              <a href="fibers/cashmere/" role="menuitem">cashmere</a>
+              <a href="fibers/silk/" role="menuitem">silk</a>
+              <a href="fibers/hemp/" role="menuitem">hemp</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">explore</span>
+              <a href="the-standard/" role="menuitem">the loomi standard</a>
+              <a href="fibers/" role="menuitem">fiber guide</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- brands mega-nav -->
+      <div class="mega-nav-item flex items-center">
+        <a href="brands/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">brands</a>
+        <div class="mega-menu">
+          <div class="mega-menu-grid">
+            <div class="mega-col">
+              <span class="mega-col-heading">our brands</span>
+              <a href="brands/" role="menuitem">all brands</a>
+              <a href="brands/pact/" role="menuitem">pact</a>
+              <a href="brands/kotn/" role="menuitem">kotn</a>
+              <a href="brands/thought/" role="menuitem">thought</a>
+              <a href="brands/eileen-fisher/" role="menuitem">eileen fisher</a>
+              <a href="brands/finisterre/" role="menuitem">finisterre</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">shop by gender</span>
+              <a href="women/" role="menuitem">women</a>
+              <a href="men/" role="menuitem">men</a>
+              <a href="kids/" role="menuitem">kids</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">by fiber</span>
+              <a href="fibers/cotton/" role="menuitem">cotton</a>
+              <a href="fibers/linen/" role="menuitem">linen</a>
+              <a href="fibers/merino-wool/" role="menuitem">merino wool</a>
+              <a href="fibers/cashmere/" role="menuitem">cashmere</a>
+              <a href="fibers/silk/" role="menuitem">silk</a>
+              <a href="fibers/hemp/" role="menuitem">hemp</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">the standard</span>
+              <a href="the-standard/" role="menuitem">the loomi standard</a>
+              <a href="the-standard/brand-criteria/" role="menuitem">brand criteria</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- the standard mega-nav -->
+      <div class="mega-nav-item flex items-center">
+        <a href="the-standard/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">the standard</a>
+        <div class="mega-menu">
+          <div class="mega-menu-grid">
+            <div class="mega-col">
+              <span class="mega-col-heading">the standard</span>
+              <a href="the-standard/" role="menuitem">the loomi standard</a>
+              <a href="the-standard/how-we-verify/" role="menuitem">how we verify</a>
+              <a href="the-standard/fiber-guide/" role="menuitem">fiber guide</a>
+              <a href="the-standard/brand-criteria/" role="menuitem">brand criteria</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">fibers</span>
+              <a href="fibers/" role="menuitem">all fibers</a>
+              <a href="fibers/cotton/" role="menuitem">cotton</a>
+              <a href="fibers/linen/" role="menuitem">linen</a>
+              <a href="fibers/merino-wool/" role="menuitem">merino wool</a>
+              <a href="fibers/cashmere/" role="menuitem">cashmere</a>
+              <a href="fibers/silk/" role="menuitem">silk</a>
+              <a href="fibers/hemp/" role="menuitem">hemp</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">brands</span>
+              <a href="brands/" role="menuitem">all brands</a>
+              <a href="brands/pact/" role="menuitem">pact</a>
+              <a href="brands/kotn/" role="menuitem">kotn</a>
+              <a href="brands/thought/" role="menuitem">thought</a>
+              <a href="brands/eileen-fisher/" role="menuitem">eileen fisher</a>
+              <a href="brands/finisterre/" role="menuitem">finisterre</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">shop</span>
+              <a href="women/" role="menuitem">women</a>
+              <a href="men/" role="menuitem">men</a>
+              <a href="kids/" role="menuitem">kids</a>
+              <a href="new/" role="menuitem">new arrivals</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button class="md:hidden flex flex-col gap-[5px] ml-auto mr-2" aria-label="Menu"
+      id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-nav-drawer">
+      <span class="block w-5 h-px" style="background:var(--text);"></span>
+      <span class="block w-5 h-px" style="background:var(--text);"></span>
+      <span class="block w-5 h-px" style="background:var(--text);"></span>
+    </button>
+
+    <!-- Utility nav: right -->
+    <div class="hidden md:flex items-center gap-5 ml-auto flex-shrink-0">
+      <input type="text" id="nav-search-input" class="nav-search-input"
+        placeholder="search" autocomplete="off" spellcheck="false"
+        oninput="navSearch(this.value)"
+        onkeydown="if(event.key==='Escape'){this.value='';navSearch('');this.blur();}" />
+      <a href="account/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);">account</a>
+      <a href="bag/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);">bag (0)</a>
+    </div>
+
+  </div>
+
+  <!-- Inline search results overlay -->
+  <div id="nav-search-overlay" class="nav-search-overlay">
+    <div class="py-10 px-5 md:px-10">
+      <div id="nav-search-count" class="section-label" style="margin-bottom:20px;"></div>
+      <div id="nav-search-grid" class="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-10"></div>
+    </div>
+  </div>
+
+</nav>
+
+<!-- ═══════════════════════════════════════════════
+     HERO — FULL BLEED, BOTTOM-LEFT SERIF TEXT
+═══════════════════════════════════════════════ -->
+<section id="loomi-main" class="relative overflow-hidden" style="height:92vh;min-height:480px;">
+  <img
+    src="images/main hero image.jpg"
+    alt="Natural fiber editorial"
+    class="w-full h-full object-cover"
+    style="object-position:center 25%;filter:brightness(0.80);"
+    loading="eager"
+    fetchpriority="high"
+  />
+  <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(0,0,0,0.32) 0%, transparent 60%);"></div>
+
+  <!-- Bottom-left text block -->
+  <div class="absolute bottom-12 left-6 md:left-10" data-motion="opacity from-bottom">
+    <h1 class="hero-headline">Dressed in<br>nature.</h1>
+    <!-- Sub-links: lowercase, white, underlined -->
+    <div class="flex flex-wrap gap-5 mt-5">
+      <a href="new/" class="nav-link" style="font-size:10px;letter-spacing:0.14em;color:rgba(255,255,255,0.9);text-decoration:underline;text-underline-offset:3px;">new in</a>
+      <a href="women/" class="nav-link" style="font-size:10px;letter-spacing:0.14em;color:rgba(255,255,255,0.9);text-decoration:underline;text-underline-offset:3px;">women</a>
+      <a href="men/" class="nav-link" style="font-size:10px;letter-spacing:0.14em;color:rgba(255,255,255,0.9);text-decoration:underline;text-underline-offset:3px;">men</a>
+      <a href="the-standard/" class="nav-link" style="font-size:10px;letter-spacing:0.14em;color:rgba(255,255,255,0.9);text-decoration:underline;text-underline-offset:3px;">the standard</a>
+      <a href="browse/" class="nav-link" style="font-size:10px;letter-spacing:0.14em;color:rgba(255,255,255,0.65);text-decoration:underline;text-underline-offset:3px;">browse all →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     TICKER BANNER
+═══════════════════════════════════════════════ -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="chk">✓</span>90%+ natural fibers only</span>
+    <span class="ticker-item"><span class="chk">✓</span>zero hidden synthetics</span>
+    <span class="ticker-item"><span class="chk">✓</span>every listing checked</span>
+    <span class="ticker-item"><span class="chk">✓</span>natural fibers, minimal processing</span>
+    <span class="ticker-item"><span class="chk">✓</span>90%+ natural fibers only</span>
+    <span class="ticker-item"><span class="chk">✓</span>zero hidden synthetics</span>
+    <span class="ticker-item"><span class="chk">✓</span>every listing checked</span>
+    <span class="ticker-item"><span class="chk">✓</span>natural fibers, minimal processing</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     OUR PROMISE — 90% RULE + BADGE EXPLAINER
+═══════════════════════════════════════════════ -->
+<section class="px-5 md:px-10 py-14 md:py-16" style="border-bottom:1px solid var(--border);">
+
+  <!-- Heading block -->
+  <div class="mb-10 md:mb-12" data-motion="opacity from-bottom">
+    <span class="section-label" style="color:var(--green);">How we curate</span>
+    <h2 class="serif" style="font-size:clamp(1.9rem,4vw,3.2rem);font-weight:400;line-height:1.1;margin-top:10px;">
+      The 90% rule.<br>Every time.
+    </h2>
+    <p style="font-size:12px;line-height:2;color:var(--text-muted);margin-top:16px;max-width:520px;">
+      Every listing on Loomi meets a single threshold: at least 90% natural fibers — cotton, linen, merino wool, cashmere, silk, or hemp. We check every product against this standard before it appears, and show the fiber breakdown clearly on every page.
+    </p>
+  </div>
+
+  <!-- Single certified badge explainer -->
+  <div style="display:flex;flex-direction:column;gap:14px;max-width:520px;align-items:flex-start;">
+    <span class="badge-certified" style="padding:4px 10px 4px 9px;"><span class="badge-certified-text">&#x2726;&#xfe0e; Loomi Pick</span></span>
+    <p style="font-size:12px;line-height:2;color:var(--text-muted);">
+      We award this badge to brands that hold independent third-party certification — GOTS, B-Corp, Bluesign, or Fair Trade — on top of our 90% threshold. Not every brand on Loomi is certified; the badge tells you which ones are.
+    </p>
+    <a href="brands/certified/" class="cta-link">View certified brands →</a>
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     CAMPAIGN SECTION 2 — SPLIT EDITORIAL
+═══════════════════════════════════════════════ -->
+<section class="grid grid-cols-1 md:grid-cols-2 overflow-hidden">
+  <!-- Left panel -->
+  <div class="component-overlay" style="min-height:480px;">
+    <img
+      src="images/the Linen Collection.webp"
+      alt="The Linen Collection"
+      class="w-full h-full object-cover"
+      style="filter:brightness(0.80);"
+    />
+    <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(0,0,0,0.30) 0%, transparent 55%);"></div>
+    <div class="absolute bottom-10 left-6" style="z-index:3;">
+      <h2 class="campaign-title" style="font-size:clamp(2rem,4vw,4rem);">The Linen<br>Collection.</h2>
+      <a href="fibers/linen/" class="overlay-cta-link">shop linen</a>
+    </div>
+    <a href="fibers/linen/" class="overlay-full-link" aria-label="Shop The Linen Collection" tabindex="-1"></a>
+  </div>
+  <!-- Right panel -->
+  <div class="component-overlay" style="min-height:480px;">
+    <img
+      src="images/linen collection.jpg"
+      alt="Summer Essentials"
+      class="w-full h-full object-cover"
+      style="filter:brightness(0.80);"
+    />
+    <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(0,0,0,0.30) 0%, transparent 55%);"></div>
+    <div class="absolute bottom-10 left-6" style="z-index:3;">
+      <h2 class="campaign-title" style="font-size:clamp(2rem,4vw,4rem);">Summer<br>Essentials.</h2>
+      <a href="women/dresses/" class="overlay-cta-link">shop summer</a>
+    </div>
+    <a href="women/dresses/" class="overlay-full-link" aria-label="Shop Summer Essentials" tabindex="-1"></a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     NATURAL FIBERS CAROUSEL
+═══════════════════════════════════════════════ -->
+<section class="py-14 px-5 md:px-10">
+  <div class="flex items-center justify-between mb-7">
+    <span class="section-label">Natural Fibers</span>
+    <div class="flex gap-1.5">
+      <button class="arrow-btn" onclick="slide('fibers',-1)">&#8249;</button>
+      <button class="arrow-btn" onclick="slide('fibers', 1)">&#8250;</button>
+    </div>
+  </div>
+  <div id="fibers" class="no-scrollbar flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory">
+
+    <a href="fibers/cotton/" class="snap-start flex-none w-[140px] md:w-[168px] group" style="text-decoration:none;color:inherit;">
+      <div class="aspect-square overflow-hidden" style="background:var(--bg-soft);">
+        <img src="images/Cotton Fabric texture.avif" alt="Cotton" class="product-img w-full h-full object-cover" />
+      </div>
+      <div class="mt-2">
+        <p style="font-size:11px;font-weight:400;">Cotton</p>
+        <p style="font-size:9px;color:var(--text-muted);line-height:1.6;margin-top:2px;">Breathable, hypoallergenic, biodegradable</p>
+      </div>
+    </a>
+
+    <a href="fibers/linen/" class="snap-start flex-none w-[140px] md:w-[168px] group" style="text-decoration:none;color:inherit;">
+      <div class="aspect-square overflow-hidden" style="background:var(--bg-soft);">
+        <img src="images/linen fabric texture.webp" alt="Linen" class="product-img w-full h-full object-cover" loading="lazy" />
+      </div>
+      <div class="mt-2">
+        <p style="font-size:11px;font-weight:400;">Linen</p>
+        <p style="font-size:9px;color:var(--text-muted);line-height:1.6;margin-top:2px;">Moisture-wicking, antibacterial, cooling</p>
+      </div>
+    </a>
+
+    <a href="fibers/merino-wool/" class="snap-start flex-none w-[140px] md:w-[168px] group" style="text-decoration:none;color:inherit;">
+      <div class="aspect-square overflow-hidden" style="background:var(--bg-soft);">
+        <img src="images/Merino Wool Fabric Texture.webp" alt="Merino Wool" class="product-img w-full h-full object-cover" loading="lazy" />
+      </div>
+      <div class="mt-2">
+        <p style="font-size:11px;font-weight:400;">Merino Wool</p>
+        <p style="font-size:9px;color:var(--text-muted);line-height:1.6;margin-top:2px;">Temperature-regulating, naturally soft</p>
+      </div>
+    </a>
+
+    <a href="fibers/cashmere/" class="snap-start flex-none w-[140px] md:w-[168px] group" style="text-decoration:none;color:inherit;">
+      <div class="aspect-square overflow-hidden" style="background:var(--bg-soft);">
+        <img src="images/Cashmere fabric texture.jpg" alt="Cashmere" class="product-img w-full h-full object-cover" />
+      </div>
+      <div class="mt-2">
+        <p style="font-size:11px;font-weight:400;">Cashmere</p>
+        <p style="font-size:9px;color:var(--text-muted);line-height:1.6;margin-top:2px;">Ultra-soft, non-irritating, long-lasting</p>
+      </div>
+    </a>
+
+    <a href="fibers/silk/" class="snap-start flex-none w-[140px] md:w-[168px] group" style="text-decoration:none;color:inherit;">
+      <div class="aspect-square overflow-hidden" style="background:var(--bg-soft);">
+        <img src="images/Silk fabric texture.webp" alt="Silk" class="product-img w-full h-full object-cover" loading="lazy" />
+      </div>
+      <div class="mt-2">
+        <p style="font-size:11px;font-weight:400;">Silk</p>
+        <p style="font-size:9px;color:var(--text-muted);line-height:1.6;margin-top:2px;">Naturally smooth, gentle on sensitive skin</p>
+      </div>
+    </a>
+
+    <a href="fibers/hemp/" class="snap-start flex-none w-[140px] md:w-[168px] group" style="text-decoration:none;color:inherit;">
+      <div class="aspect-square overflow-hidden" style="background:var(--bg-soft);">
+        <img src="images/Hemp Fabric Texture.webp" alt="Hemp" class="product-img w-full h-full object-cover" loading="lazy" />
+      </div>
+      <div class="mt-2">
+        <p style="font-size:11px;font-weight:400;">Hemp</p>
+        <p style="font-size:9px;color:var(--text-muted);line-height:1.6;margin-top:2px;">Durable, UV-resistant, earth-replenishing</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PRODUCT GRID — NEW ARRIVALS
+═══════════════════════════════════════════════ -->
+<section class="py-14 px-5 md:px-10">
+  <div class="flex items-center justify-between mb-7">
+    <span class="section-label">New Arrivals</span>
+    <a href="#" class="nav-link" style="font-size:10px;letter-spacing:0.1em;color:var(--text-muted);text-decoration:underline;text-underline-offset:3px;">show more</a>
+  </div>
+
+  <!-- Populated by inline JS below using renderProductCard() -->
+  <div id="hp-new-arrivals-grid" class="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-10" data-motion="opacity from-bottom"></div>
+
+  <div class="text-center mt-10">
+    <a href="#" class="nav-link" style="font-size:10px;letter-spacing:0.1em;color:var(--text-muted);text-decoration:underline;text-underline-offset:3px;">show more</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     BRAND CAROUSEL — PACT
+═══════════════════════════════════════════════ -->
+<section class="py-14 px-5 md:px-10">
+  <div class="flex items-center justify-between mb-7">
+    <div>
+      <span class="section-label">Pact</span>
+      <p style="font-size:9px;color:var(--text-muted);letter-spacing:0.1em;margin-top:2px;">Organic Cotton Essentials</p>
+    </div>
+    <div class="flex gap-1.5">
+      <button class="arrow-btn" onclick="slide('pact',-1)">&#8249;</button>
+      <button class="arrow-btn" onclick="slide('pact', 1)">&#8250;</button>
+    </div>
+  </div>
+  <div id="pact" class="no-scrollbar flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     BRAND CAROUSEL — KOTN
+═══════════════════════════════════════════════ -->
+<section class="py-14 px-5 md:px-10">
+  <div class="flex items-center justify-between mb-7">
+    <div>
+      <span class="section-label">Kotn</span>
+      <p style="font-size:9px;color:var(--text-muted);letter-spacing:0.1em;margin-top:2px;">Egyptian Cotton Staples</p>
+    </div>
+    <div class="flex gap-1.5">
+      <button class="arrow-btn" onclick="slide('kotn',-1)">&#8249;</button>
+      <button class="arrow-btn" onclick="slide('kotn', 1)">&#8250;</button>
+    </div>
+  </div>
+  <div id="kotn" class="no-scrollbar flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory"></div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     WHY LOOMI — EDITORIAL SPLIT
+═══════════════════════════════════════════════ -->
+<section>
+  <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr]" style="min-height:420px;">
+
+    <!-- Left: editorial photo -->
+    <div class="overflow-hidden" style="min-height:300px;">
+      <img
+        src="images/linen collection.jpg"
+        alt="Why Loomi"
+        class="w-full h-full object-cover"
+        style="min-height:300px;filter:brightness(0.93);"
+      />
+    </div>
+
+    <!-- Right: brand story -->
+    <div class="flex flex-col justify-center px-10 md:px-14 py-16" style="background:var(--bg);">
+      <span class="section-label" style="color:var(--green);margin-bottom:16px;">The Loomi Standard</span>
+      <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;line-height:1.15;margin-bottom:20px;">No more label<br>detective work.</h2>
+      <p style="font-size:10px;line-height:2;letter-spacing:0.06em;color:var(--text-muted);max-width:280px;">
+        We built Loomi because finding genuinely natural clothing shouldn't require two hours of label reading. Every listing here has been checked against our standard: at least 90% natural fiber. The fiber breakdown is on every page — no digging required.
+      </p>
+      <a href="the-standard/how-we-verify/" class="nav-link" style="margin-top:32px;width:fit-content;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;border-bottom:1px solid var(--text);padding-bottom:2px;color:var(--text);">
+        → See How We Verify
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<footer style="background:var(--bg);overflow:hidden;">
+
+  <!-- ── Main footer: 2-column grid (LEFT = slogan + wordmark, RIGHT = newsletter + social + accordion) ── -->
+  <div class="grid grid-cols-1 md:grid-cols-[3fr_2fr]" style="min-height:360px;">
+
+    <!-- LEFT col: wordmark + slogan, pinned to top -->
+    <div class="px-5 md:px-10 pt-12 pb-10 flex flex-col" style="align-self:start;">
+      <!-- Wordmark -->
+      <p class="footer-wordmark-col" style="margin-top:0;padding-bottom:0;overflow:hidden;">Loomi</p>
+      <!-- Slogan (italic) -->
+      <p class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;color:var(--text);line-height:1.45;max-width:480px;font-style:italic;margin-top:12px;">
+        Nothing but nature against your skin.
+      </p>
+    </div>
+
+    <!-- RIGHT col: newsletter → social → divider → accordions -->
+    <div class="px-5 md:px-10 pt-12 pb-10 flex flex-col">
+
+      <!-- Newsletter muted descriptor -->
+      <p style="font-size:10px;color:var(--text-muted);letter-spacing:0.1em;font-family:var(--font-ui);text-transform:lowercase;margin-bottom:14px;">natural fiber finds, direct to your inbox</p>
+
+      <!-- Email input -->
+      <div style="display:flex;align-items:center;border-bottom:1px solid var(--text);max-width:280px;padding-bottom:8px;gap:12px;margin-bottom:24px;">
+        <input
+          type="email"
+          placeholder="your email"
+          style="background:transparent;font-size:11px;letter-spacing:0.08em;color:var(--text);outline:none;border:none;font-family:var(--font-ui);flex:1;text-transform:lowercase;"
+        />
+        <button style="font-size:11px;letter-spacing:0.08em;color:var(--text);background:none;border:none;cursor:pointer;font-family:var(--font-ui);white-space:nowrap;">sign up +</button>
+      </div>
+
+      <!-- Social links -->
+      <div class="flex flex-wrap gap-5" style="margin-bottom:20px;">
+        <a href="#" class="nav-link" style="font-size:11px;letter-spacing:0.04em;color:var(--text);">Instagram</a>
+        <a href="#" class="nav-link" style="font-size:11px;letter-spacing:0.04em;color:var(--text);">TikTok</a>
+        <a href="#" class="nav-link" style="font-size:11px;letter-spacing:0.04em;color:var(--text);">Pinterest</a>
+        <a href="#" class="nav-link" style="font-size:11px;letter-spacing:0.04em;color:var(--text);">YouTube</a>
+      </div>
+
+      <!-- Divider -->
+      <div style="margin-bottom:4px;"></div>
+
+      <!-- Accordion: The Loomi Standard (new) -->
+      <div class="footer-acc-item">
+        <button class="footer-acc-btn" onclick="toggleAcc(this)">
+          the loomi standard
+          <span style="font-size:16px;line-height:1;">+</span>
+        </button>
+        <div class="footer-acc-content">
+          <a href="the-standard/how-we-verify/">what we verify</a>
+          <a href="the-standard/brand-criteria/">brand criteria</a>
+          <a href="the-standard/fiber-guide/">fiber guide</a>
+        </div>
+      </div>
+
+      <!-- Accordion: How It Works -->
+      <div class="footer-acc-item">
+        <button class="footer-acc-btn" onclick="toggleAcc(this)">
+          how it works
+          <span style="font-size:16px;line-height:1;">+</span>
+        </button>
+        <div class="footer-acc-content">
+          <a href="how-it-works/">where to buy</a>
+          <a href="returns-support/">returns &amp; support</a>
+          <a href="faq/">faq</a>
+          <a href="contact/">contact us</a>
+        </div>
+      </div>
+
+      <!-- Accordion: About Us -->
+      <div class="footer-acc-item">
+        <button class="footer-acc-btn" onclick="toggleAcc(this)">
+          about us
+          <span style="font-size:16px;line-height:1;">+</span>
+        </button>
+        <div class="footer-acc-content">
+          <a href="about/">our story</a>
+          <a href="brands/">our brands</a>
+          <a href="blog/">blog</a>
+        </div>
+      </div>
+
+      <!-- Accordion: Legal -->
+      <div class="footer-acc-item">
+        <button class="footer-acc-btn" onclick="toggleAcc(this)">
+          legal information
+          <span style="font-size:16px;line-height:1;">+</span>
+        </button>
+        <div class="footer-acc-content">
+          <a href="privacy-policy/">privacy policy</a>
+          <a href="terms/">terms &amp; conditions</a>
+          <a href="returns-policy/">returns policy</a>
+          <a href="affiliate-disclosure/">affiliate disclosure</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom copyright bar (full width) -->
+  <div class="px-5 md:px-10 py-5 flex flex-wrap items-center justify-between gap-4">
+    <p style="font-size:10px;color:var(--text-muted);letter-spacing:0.08em;">© 2026 Loomi.</p>
+    <p style="font-size:10px;color:var(--text-muted);letter-spacing:0.08em;">United States</p>
+  </div>
+
+</footer>
+
+<!-- ═══════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════ -->
+<script>
+  window.LOOMI_ROOT = '';
+  window.PAGE_CONFIG = { type: 'home' };
+</script>
+<script src="js/data.js?v=5"></script>
+<script src="js/components.js?v=5"></script>
+<script src="js/plp.js?v=5"></script>
+<script src="js/page.js?v=5"></script>
+
+<script>
+  function slide(id, dir) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const amount = el.offsetWidth * 0.65;
+    el.scrollBy({ left: dir * amount, behavior: 'smooth' });
+  }
+
+  function toggleAcc(btn) {
+    const content = btn.nextElementSibling;
+    const icon = btn.querySelector('span');
+    const isOpen = content.classList.contains('open');
+    content.classList.toggle('open', !isOpen);
+    icon.textContent = isOpen ? '+' : '−';
+  }
+
+  function toggleMega(e, el) {
+    e.preventDefault();
+    var item = el.closest('.mega-nav-item');
+    var wasOpen = item.classList.contains('is-open');
+    closeAllMega();
+    if (!wasOpen) item.classList.add('is-open');
+  }
+
+  function closeAllMega() {
+    document.querySelectorAll('.mega-nav-item.is-open')
+      .forEach(function(i) { i.classList.remove('is-open'); });
+  }
+
+  var _megaTimer = null;
+  document.addEventListener('mouseover', function(e) {
+    var navItem = e.target.closest('.mega-nav-item');
+    var inMenu = e.target.closest('.mega-menu');
+
+    if (navItem || inMenu) {
+      if (_megaTimer) { clearTimeout(_megaTimer); _megaTimer = null; }
+      if (navItem && !inMenu) {
+        var alreadyOpen = navItem.classList.contains('is-open');
+        if (!alreadyOpen) {
+          closeAllMega();
+          navItem.classList.add('is-open');
+        }
+      }
+    } else {
+      if (_megaTimer) clearTimeout(_megaTimer);
+      _megaTimer = setTimeout(closeAllMega, 180);
+    }
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.mega-nav-item') && !e.target.closest('.mega-menu')) {
+      closeAllMega();
+    }
+  });
+</script>
+
+<!-- ═══════════════════════════════════════════════
+     HOMEPAGE PRODUCT SECTIONS — rendered from data.js
+═══════════════════════════════════════════════ -->
+<script>
+(function() {
+  var C = window.LOOMI_COMPONENTS;
+  var P = window.LOOMI.PRODUCTS;
+
+  // New Arrivals — first 4 isNew products
+  var newEl = document.getElementById('hp-new-arrivals-grid');
+  if (newEl) {
+    var newItems = P.filter(function(p) { return p.isNew; }).slice(0, 4);
+    newEl.innerHTML = newItems.map(function(p) { return C.renderProductCard(p); }).join('');
+  }
+
+  // Pact carousel
+  var pactEl = document.getElementById('pact');
+  if (pactEl) {
+    var pactItems = P.filter(function(p) { return p.brand === 'pact'; }).slice(0, 8);
+    pactEl.innerHTML = pactItems.map(function(p) {
+      return C.renderProductCard(p, { mode: 'carousel' });
+    }).join('');
+  }
+
+  // Kotn carousel
+  var kotnEl = document.getElementById('kotn');
+  if (kotnEl) {
+    var kotnItems = P.filter(function(p) { return p.brand === 'kotn'; }).slice(0, 8);
+    kotnEl.innerHTML = kotnItems.map(function(p) {
+      return C.renderProductCard(p, { mode: 'carousel' });
+    }).join('');
+  }
+})();
+</script>
+
+<script>
+/* ─── MOTION OBSERVER — homepage standalone ──────────────────── */
+(function () {
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('[data-motion]').forEach(function (el) {
+      el.classList.add('is-visible');
+    });
+    return;
+  }
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('[data-motion]').forEach(function (el) {
+    obs.observe(el);
+  });
+})();
+</script>
+
+</body>
+</html>

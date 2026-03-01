@@ -1,0 +1,132 @@
+{
+  "products": [
+    {
+      "id": 1001,
+      "title": "Organic Cotton Classic Crewneck Tee",
+      "handle": "womens-organic-cotton-classic-crewneck-tee",
+      "body_html": "<p>Our go-to everyday tee. GOTS-certified and Fair Trade Certified. Made from 100% Organic Cotton.</p>",
+      "images": [{ "src": "https://picsum.photos/seed/pact-ct01/400/533" }],
+      "variants": [{ "price": "28.00" }]
+    },
+    {
+      "id": 1002,
+      "title": "Organic Cotton V-Neck Tee",
+      "handle": "womens-organic-cotton-v-neck-tee",
+      "body_html": "<p>Lightweight, breathable, and chemical-free. GOTS-certified from field to finished garment. Made from 100% Organic Cotton.</p>",
+      "images": [{ "src": "https://picsum.photos/seed/pact-vn01/400/533" }],
+      "variants": [{ "price": "25.00" }]
+    },
+    {
+      "id": 1003,
+      "title": "Organic Cotton Long-Sleeve Tee",
+      "handle": "womens-organic-cotton-long-sleeve-tee",
+      "body_html": "<p>The long-sleeve version of our classic tee. Naturally soft, season after season. Made from 100% Organic Cotton.</p>",
+      "images": [{ "src": "https://picsum.photos/seed/pact-ls01/400/533" }],
+      "variants": [{ "price": "34.00" }]
+    },
+    {
+      "id": 1004,
+      "title": "Organic Cotton Cropped Tank",
+      "handle": "womens-organic-cotton-cropped-tank",
+      "body_html": "<p>Perfect for layering or wearing solo. GOTS-certified and Fair Trade made. Made from 100% Organic Cotton.</p>",
+      "images": [{ "src": "https://picsum.photos/seed/pact-tk01/400/533" }],
+      "variants": [{ "price": "22.00" }]
+    },
+    {
+      "id": 1005,
+      "title": "Organic Cotton High-Rise Legging",
+      "handle": "womens-organic-cotton-high-rise-legging",
+      "body_html": "<p>Move freely. GOTS-certified and Fair Trade Certified. Made from 95% Organic Cotton, 5% Elastane.</p>",
+      "images": [{ "src": "https://picsum.photos/seed/pact-lg01/400/533" }],
+      "variants": [{ "price": "48.00" }]
+    },
+    {
+      "id": 1006,
+      "title": "Organic Cotton French Terry Pullover",
+      "handle": "womens-organic-cotton-french-terry-pullover",
+      "body_html": "<p>Cozy-meets-conscious. GOTS-certified and Fair Trade Certified. Made from 100% Organic Cotton.</p>",
+      "images": [{ "src": "https://picsum.photos/seed/pact-ft01/400/533" }],
+      "variants": [{ "price": "58.00" }]
+    },
+    {
+      "id": 1007,
+      "title": "Organic Cotton Bralette",
+      "handle": "womens-organic-cotton-bralette",
+      "body_html": "<p>Soft, supportive, and chemical-free. GOTS-certified from start to finish. Made from 95% Organic Cotton, 5% Elastane.</p>",
+      "images": [{ "src": "https://picsum.photos/seed/pact-br01/400/533" }],
+      "variants": [{ "price": "28.00" }]
+    },
+    {
+      "id": 1008,
+      "title": "Organic Cotton Zip Hoodie",
+      "handle": "womens-organic-cotton-zip-hoodie",
+      "body_html": "<p>No synthetic fleece, no compromise on comfort. GOTS-certified. Made from 100% Organic Cotton.</p>",
+      "images": [{ "src": "https://picsum.photos/seed/pact-zh01/400/533" }],
+      "variants": [{ "price": "68.00" }]
+    },
+    {
+      "id": 1009,
+      "title": "Organic Cotton Essential Crewneck Tee",
+      "handle": "mens-organic-cotton-essential-crewneck-tee",
+      "body_html": "<p>The men's essential tee, done right. Fair Trade Certified, made without harmful dyes or finishes. Made from 100% Organic Cotton.</p>",
+      "images": [{ "src": "https://picsum.photos/seed/pact-mt01/400/533" }],
+      "variants": [{ "price": "28.00" }]
+    },
+    {
+      "id": 1010,
+      "title": "Organic Cotton Long-Sleeve Pocket Tee",
+      "handle": "mens-organic-cotton-long-sleeve-pocket-tee",
+      "body_html": "<p>A refined long-sleeve with a chest pocket. GOTS-certified and built to outlast fast fashion. Made from 100% Organic Cotton.</p>",
+      "images": [{ "src": "https://picsum.photos/seed/pact-mp01/400/533" }],
+      "variants": [{ "price": "34.00" }]
+    },
+    {
+      "id": 1011,
+      "title": "Organic Cotton Jogger",
+      "handle": "mens-organic-cotton-jogger",
+      "body_html": "<p>Relaxed-fit French Terry jogger. Fair Trade Certified and GOTS-certified. Made from 100% Organic Cotton.</p>",
+      "images": [{ "src": "https://picsum.photos/seed/pact-jg01/400/533" }],
+      "variants": [{ "price": "52.00" }]
+    },
+    {
+      "id": 1012,
+      "title": "Organic Cotton Henley",
+      "handle": "mens-organic-cotton-henley",
+      "body_html": "<p>A classic three-button henley. Soft, durable, and free of synthetic finishes. Made from 100% Organic Cotton.</p>",
+      "images": [{ "src": "https://picsum.photos/seed/pact-hn01/400/533" }],
+      "variants": [{ "price": "40.00" }]
+    },
+    {
+      "id": 1013,
+      "title": "Organic Cotton Boxer Brief",
+      "handle": "mens-organic-cotton-boxer-brief",
+      "body_html": "<p>All-day comfort. GOTS-certified and Fair Trade Certified. Made from 95% Organic Cotton, 5% Elastane.</p>",
+      "images": [{ "src": "https://picsum.photos/seed/pact-bb01/400/533" }],
+      "variants": [{ "price": "20.00" }]
+    },
+    {
+      "id": 1014,
+      "title": "Kids Organic Cotton Bodysuit",
+      "handle": "kids-organic-cotton-bodysuit",
+      "body_html": "<p>Gentle on baby's skin. No harsh dyes, no formaldehyde finishes. Made from 100% Organic Cotton.</p>",
+      "images": [{ "src": "https://picsum.photos/seed/pact-kb01/400/533" }],
+      "variants": [{ "price": "18.00" }]
+    },
+    {
+      "id": 1015,
+      "title": "Kids Organic Cotton Tee",
+      "handle": "kids-organic-cotton-tee",
+      "body_html": "<p>A durable everyday tee built for real play. GOTS-certified and Fair Trade Certified. Made from 100% Organic Cotton.</p>",
+      "images": [{ "src": "https://picsum.photos/seed/pact-kt01/400/533" }],
+      "variants": [{ "price": "16.00" }]
+    },
+    {
+      "id": 1016,
+      "title": "Organic Cotton Waffle Crew Socks 3-Pack",
+      "handle": "organic-cotton-waffle-crew-socks-3-pack",
+      "body_html": "<p>Three pairs of cozy waffle-knit socks. GOTS-certified organic content. Made from 80% Organic Cotton, 17% Nylon, 3% Elastane.</p>",
+      "images": [{ "src": "https://picsum.photos/seed/pact-sk01/400/533" }],
+      "variants": [{ "price": "20.00" }]
+    }
+  ]
+}
