@@ -486,12 +486,15 @@
   }
 
   /* ─── PLP HEADER ──────────────────────────────────────────────── */
-  function renderPLPHeader(title, count) {
-    return '<div class="flex items-end justify-between mb-3">' +
+  function renderPLPHeader(title, count, tagline) {
+    return '<div class="flex items-end justify-between mb-1">' +
            '<h1 class="serif" style="font-size:clamp(2rem,4vw,3.5rem);font-weight:400;line-height:1.1;">' +
            title + '</h1>' +
            '<span class="section-label">' + count + ' pieces</span>' +
-           '</div>';
+           '</div>' +
+           (tagline
+             ? '<p style="font-size:0.8rem;color:var(--muted);font-style:italic;margin-bottom:12px;">' + tagline + '</p>'
+             : '<div style="margin-bottom:12px;"></div>');
   }
 
   /* ─── BREADCRUMB ──────────────────────────────────────────────── */

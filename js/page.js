@@ -191,26 +191,54 @@
     if (e.key === 'Escape') closeAllMega();
   });
 
-  var main = document.getElementById('loomi-main');
-  if (!main) return;
-
-  /* ─── DISPATCH ────────────────────────────────────────────────── */
-  switch (cfg.type) {
-    case 'home': break; /* homepage keeps its inline HTML */
-    case 'plp':         renderPLP(main, cfg); break;
-    case 'fiber':       renderFiberPage(main, cfg); break;
-    case 'brand':       renderBrandPage(main, cfg); break;
-    case 'directory':   renderDirectory(main, cfg); break;
-    case 'pdp':         renderPDP(main, cfg); break;
-    case 'the-standard': renderTheStandard(main, cfg); break;
-    case 'utility':     renderUtility(main, cfg); break;
-    case 'editorial':   renderEditorial(main, cfg); break;
-    default: break;
-  }
 
   /* ════════════════════════════════════════════════════════════════
      PLP
   ════════════════════════════════════════════════════════════════ */
+
+  /* ─── CATEGORY TAGLINES ───────────────────────────────────────── */
+  var PLP_TAGLINES = {
+    /* Women — category-specific */
+    'women:dresses':   'Sustainable dresses. Kinda our thing.',
+    'women:tops':      'No sleeves, no problem.',
+    'women:trousers':  'Trousers that outlast the trend.',
+    'women:knitwear':  'Knit from the earth, not a lab.',
+    'women:outerwear': 'Layer up. Synthetics not invited.',
+    'women:sleepwear': 'Nothing between you and a good night\'s sleep. Except linen.',
+    /* Men — category-specific */
+    'men:tops':        'The everyday essential. No polyester required.',
+    'men:trousers':    'Trousers that outlast the trend.',
+    'men:knitwear':    'Knit from the earth, not a lab.',
+    'men:outerwear':   'Layer up. Synthetics not invited.',
+    'men:shirts':      'Shirts with nothing to hide. Label included.',
+    'men:underwear':   'The closest thing to nature. Literally.',
+    /* Kids — category-specific */
+    'kids:tops':       'Little tops, big standards.',
+    'kids:bottoms':    'Bottoms up — on synthetics.',
+    'kids:outerwear':  'Little explorers. Big fiber standards.',
+    'kids:sleepwear':  'Sweet dreams, no synthetics.',
+    'kids:sets':       'Two-piece. Zero polyester.',
+    /* Gender index pages */
+    'women':           'Natural fiber clothing for women. Curated to 90%.',
+    'men':             'Natural fiber clothing for men. Nothing hiding in the label.',
+    'kids':            'For the little ones. Minus the synthetics.',
+    /* Special pages */
+    'isNew':           'Fresh arrivals. Same uncompromising standard.',
+    'isBestSeller':    'The community has spoken. The fibers agree.',
+    'isOnSale':        'Good fibers, better prices.'
+  };
+
+  function getPlpTagline(cfg) {
+    var f = cfg.filters || {};
+    var key = (f.gender && f.category) ? (f.gender + ':' + f.category) : null;
+    if (key && PLP_TAGLINES[key])           return PLP_TAGLINES[key];
+    if (f.isNew        && PLP_TAGLINES['isNew'])        return PLP_TAGLINES['isNew'];
+    if (f.isBestSeller && PLP_TAGLINES['isBestSeller']) return PLP_TAGLINES['isBestSeller'];
+    if (f.isOnSale     && PLP_TAGLINES['isOnSale'])     return PLP_TAGLINES['isOnSale'];
+    if (f.gender       && PLP_TAGLINES[f.gender])       return PLP_TAGLINES[f.gender];
+    return null;
+  }
+
   function renderPLP(container, cfg) {
     var genderDesc = {
       women: 'Browse women\'s natural fiber clothing from verified brands — cotton, linen, silk, cashmere and more. Every listing 90%+ natural.',
@@ -227,7 +255,7 @@
 
     container.innerHTML =
       '<div class="py-14 px-5 md:px-10">' +
-        C.renderPLPHeader(cfg.title || 'Shop', base.length) +
+        C.renderPLPHeader(cfg.title || 'Shop', base.length, getPlpTagline(cfg)) +
         '<div id="plp-chips"></div>' +
         /* Mobile filter button */
         '<button class="plp-mobile-filter-btn md:hidden" onclick="PLP.openDrawer()">Filter + Sort</button>' +
@@ -1357,5 +1385,30 @@
   window.LOOMI = window.LOOMI || {};
   window.LOOMI.initMotion = initMotion;
   initMotion();
+
+  /* ─── DISPATCH MAIN CONTENT ─────────────────────────────────────
+     This is at the end of the IIFE to ensure all functions are defined
+  ───────────────────────────────────────────────────────────────── */
+  try {
+    var main = document.getElementById('loomi-main');
+    if (main && cfg && cfg.type) {
+      switch (cfg.type) {
+        case 'home': break; /* homepage keeps its inline HTML */
+        case 'plp':         renderPLP(main, cfg); break;
+        case 'fiber':       renderFiberPage(main, cfg); break;
+        case 'brand':       renderBrandPage(main, cfg); break;
+        case 'directory':   renderDirectory(main, cfg); break;
+        case 'pdp':         renderPDP(main, cfg); break;
+        case 'the-standard': renderTheStandard(main, cfg); break;
+        case 'utility':     renderUtility(main, cfg); break;
+        case 'editorial':   renderEditorial(main, cfg); break;
+        default: break;
+      }
+    }
+  } catch (dispatchErr) {
+    if (console && console.error) {
+      console.error('Page dispatch error:', dispatchErr);
+    }
+  }
 
 })();
