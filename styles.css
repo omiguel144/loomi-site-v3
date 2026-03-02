@@ -375,6 +375,87 @@ a.nav-link.serif:active {
   border-radius: 20px;
 }
 
+/* ─── PROMO BAR ──────────────────────────────── */
+.promo-bar {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--text);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bg);
+  font-family: var(--font-ui);
+}
+#loomi-promo-msg {
+  transition: opacity 0.35s ease;
+}
+@media (max-width: 639px) {
+  .promo-bar { height: 28px; font-size: 8px; letter-spacing: 0.14em; }
+}
+
+/* ─── SITE NAV TOP (MATE-style tier) ─────────── */
+/* Hidden on mobile, shown from 768px up — pure CSS, no Tailwind needed */
+.site-nav-top {
+  display: none;
+}
+@media (min-width: 768px) {
+  .site-nav-top {
+    height: 36px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--border);
+    gap: 0;
+  }
+}
+.site-nav-top a {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: var(--font-ui);
+  transition: color 0.15s;
+  text-transform: lowercase;
+  padding: 0 14px;
+  border-right: 1px solid var(--border);
+  line-height: 36px;
+}
+.site-nav-top a:first-child { padding-left: 0; }
+.site-nav-top a:last-child { border-right: none; }
+.site-nav-top a:hover { color: var(--text); }
+
+/* ─── VALUES / MISSION TABS ──────────────────── */
+.values-tabs { }
+.values-tab-toggles {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+.values-tab-toggle {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: lowercase;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 12px 20px 11px;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.values-tab-toggle:hover { color: var(--text); }
+.values-tab-toggle.is-active {
+  color: var(--text);
+  border-bottom-color: var(--text);
+}
+.values-tab-panel { display: none; }
+.values-tab-panel.is-active { display: block; }
+
 /* ═══ MEGA-MENU ═══════════════════════════════ */
 .mega-nav-item { position: static; height: 100%; display: flex; align-items: center; }
 .mega-nav-item .mega-menu {
@@ -391,7 +472,7 @@ a.nav-link.serif:active {
 }
 .mega-menu {
   position: fixed;
-  top: 44px;
+  top: 112px;
   left: 0; right: 0;
   background: var(--bg);
   z-index: 51;
@@ -482,7 +563,7 @@ a.nav-link.serif:active {
 .mega-backdrop {
   position: fixed;
   inset: 0;
-  top: 44px;
+  top: 112px;
   background: rgba(0,0,0,0.12);
   z-index: 50;
   opacity: 0;

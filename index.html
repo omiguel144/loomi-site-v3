@@ -10,7 +10,7 @@
   <!-- Local images served from /images/ -->
   <!-- Display serif (Cormorant Garamond) + UI sans-serif (DM Sans) -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=9" />
   <meta name="description" content="Loomi is a curated index of natural fiber clothing — 90%+ natural in every listing. Cotton, linen, merino wool, cashmere, silk and hemp, from verified brands." />
   <meta property="og:title" content="Loomi — Natural Fiber Clothing" />
   <meta property="og:description" content="90%+ natural fibers. Every listing checked. Browse clothing from certified natural fiber brands." />
@@ -73,6 +73,20 @@
 ═══════════════════════════════════════════════ -->
 <a href="#loomi-main" class="skip-to-main">Skip to main content</a>
 <nav class="sticky top-0 z-50" style="background:var(--bg);">
+
+  <!-- Row 1: Promo bar -->
+  <div class="promo-bar" id="loomi-promo-bar">
+    <span id="loomi-promo-msg">Free shipping on orders $200+</span>
+  </div>
+
+  <!-- Row 2: Site nav top (desktop only, shown via CSS @media) -->
+  <div class="site-nav-top">
+    <a href="browse/">shop</a>
+    <a href="blog/">read</a>
+    <a href="the-standard/">our promise</a>
+  </div>
+
+  <!-- Row 3: Main nav -->
   <div class="flex items-center h-11 px-5 gap-7">
 
     <!-- Logo: left, serif, Title Case -->
@@ -81,133 +95,68 @@
     <!-- Primary categories: lowercase, 11px, sans-serif -->
     <div class="hidden md:flex items-center gap-6 flex-1">
 
-      <!-- new mega-nav -->
+      <!-- new in mega-nav -->
       <div class="mega-nav-item flex items-center">
-        <a href="new/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">new</a>
+        <a href="new/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">new in</a>
         <div class="mega-menu">
           <div class="mega-menu-grid">
             <div class="mega-col">
-              <span class="mega-col-heading">new in</span>
+              <span class="mega-col-heading">New Arrivals</span>
               <a href="new/" role="menuitem">all new arrivals</a>
               <a href="women/new-arrivals/" role="menuitem">women's new</a>
               <a href="men/new-arrivals/" role="menuitem">men's new</a>
               <a href="kids/new-arrivals/" role="menuitem">kids' new</a>
             </div>
             <div class="mega-col">
-              <span class="mega-col-heading">trending</span>
+              <span class="mega-col-heading">Trending</span>
               <a href="women/best-sellers/" role="menuitem">women's best sellers</a>
               <a href="men/best-sellers/" role="menuitem">men's best sellers</a>
               <a href="kids/best-sellers/" role="menuitem">kids' best sellers</a>
             </div>
             <div class="mega-col">
-              <span class="mega-col-heading">by fiber</span>
-              <a href="fibers/cotton/" role="menuitem">cotton</a>
-              <a href="fibers/linen/" role="menuitem">linen</a>
-              <a href="fibers/merino-wool/" role="menuitem">merino wool</a>
-              <a href="fibers/cashmere/" role="menuitem">cashmere</a>
-            </div>
-            <div class="mega-col">
-              <span class="mega-col-heading">sale</span>
+              <span class="mega-col-heading">Sale</span>
               <a href="women/sale/" role="menuitem">women's sale</a>
               <a href="men/sale/" role="menuitem">men's sale</a>
               <a href="kids/sale/" role="menuitem">kids' sale</a>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- women mega-nav -->
-      <div class="mega-nav-item flex items-center">
-        <a href="women/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">women</a>
-        <div class="mega-menu">
-          <div class="mega-menu-grid">
             <div class="mega-col">
-              <span class="mega-col-heading">women's</span>
-              <a href="women/new-arrivals/" role="menuitem">new arrivals</a>
-              <a href="women/best-sellers/" role="menuitem">best sellers</a>
-              <a href="women/sale/" role="menuitem">sale</a>
-            </div>
-            <div class="mega-col">
-              <span class="mega-col-heading">clothing</span>
-              <a href="women/tops/" role="menuitem">tops &amp; tees</a>
-              <a href="women/dresses/" role="menuitem">dresses</a>
-              <a href="women/trousers/" role="menuitem">trousers</a>
-              <a href="women/knitwear/" role="menuitem">knitwear</a>
-              <a href="women/outerwear/" role="menuitem">outerwear</a>
-              <a href="women/sleepwear/" role="menuitem">sleepwear</a>
-            </div>
-            <div class="mega-col">
-              <span class="mega-col-heading">by fiber</span>
-              <a href="fibers/cotton/" role="menuitem">cotton</a>
-              <a href="fibers/linen/" role="menuitem">linen</a>
-              <a href="fibers/merino-wool/" role="menuitem">merino wool</a>
-              <a href="fibers/cashmere/" role="menuitem">cashmere</a>
-              <a href="fibers/silk/" role="menuitem">silk</a>
-              <a href="fibers/hemp/" role="menuitem">hemp</a>
-            </div>
-            <div class="mega-col">
-              <span class="mega-col-heading">brands</span>
+              <span class="mega-col-heading">By Brand</span>
               <a href="brands/pact/" role="menuitem">pact</a>
               <a href="brands/kotn/" role="menuitem">kotn</a>
               <a href="brands/thought/" role="menuitem">thought</a>
               <a href="brands/eileen-fisher/" role="menuitem">eileen fisher</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- men mega-nav -->
-      <div class="mega-nav-item flex items-center">
-        <a href="men/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">men</a>
-        <div class="mega-menu">
-          <div class="mega-menu-grid">
-            <div class="mega-col">
-              <span class="mega-col-heading">men's</span>
-              <a href="men/new-arrivals/" role="menuitem">new arrivals</a>
-              <a href="men/best-sellers/" role="menuitem">best sellers</a>
-              <a href="men/sale/" role="menuitem">sale</a>
-            </div>
-            <div class="mega-col">
-              <span class="mega-col-heading">clothing</span>
-              <a href="men/t-shirts-tops/" role="menuitem">t-shirts &amp; tops</a>
-              <a href="men/shirts/" role="menuitem">shirts</a>
-              <a href="men/trousers/" role="menuitem">trousers</a>
-              <a href="men/knitwear/" role="menuitem">knitwear</a>
-              <a href="men/outerwear/" role="menuitem">outerwear</a>
-              <a href="men/underwear/" role="menuitem">underwear</a>
-            </div>
-            <div class="mega-col">
-              <span class="mega-col-heading">by fiber</span>
-              <a href="fibers/cotton/" role="menuitem">cotton</a>
-              <a href="fibers/linen/" role="menuitem">linen</a>
-              <a href="fibers/merino-wool/" role="menuitem">merino wool</a>
-              <a href="fibers/cashmere/" role="menuitem">cashmere</a>
-              <a href="fibers/hemp/" role="menuitem">hemp</a>
-            </div>
-            <div class="mega-col">
-              <span class="mega-col-heading">brands</span>
-              <a href="brands/pact/" role="menuitem">pact</a>
-              <a href="brands/kotn/" role="menuitem">kotn</a>
-              <a href="brands/thought/" role="menuitem">thought</a>
               <a href="brands/finisterre/" role="menuitem">finisterre</a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- kids mega-nav -->
+      <!-- clothing mega-nav -->
       <div class="mega-nav-item flex items-center">
-        <a href="kids/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">kids</a>
+        <a href="women/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">clothing</a>
         <div class="mega-menu">
           <div class="mega-menu-grid">
             <div class="mega-col">
-              <span class="mega-col-heading">kids'</span>
-              <a href="kids/new-arrivals/" role="menuitem">new arrivals</a>
-              <a href="kids/best-sellers/" role="menuitem">best sellers</a>
-              <a href="kids/sale/" role="menuitem">sale</a>
+              <span class="mega-col-heading">Women's</span>
+              <a href="women/" role="menuitem">all women's</a>
+              <a href="women/tops/" role="menuitem">tops &amp; tees</a>
+              <a href="women/dresses/" role="menuitem">dresses</a>
+              <a href="women/trousers/" role="menuitem">trousers</a>
+              <a href="women/knitwear/" role="menuitem">knitwear</a>
+              <a href="women/outerwear/" role="menuitem">outerwear</a>
             </div>
             <div class="mega-col">
-              <span class="mega-col-heading">clothing</span>
+              <span class="mega-col-heading">Men's</span>
+              <a href="men/" role="menuitem">all men's</a>
+              <a href="men/t-shirts-tops/" role="menuitem">t-shirts &amp; tops</a>
+              <a href="men/shirts/" role="menuitem">shirts</a>
+              <a href="men/trousers/" role="menuitem">trousers</a>
+              <a href="men/knitwear/" role="menuitem">knitwear</a>
+              <a href="men/outerwear/" role="menuitem">outerwear</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">Kids'</span>
+              <a href="kids/" role="menuitem">all kids'</a>
               <a href="kids/tops/" role="menuitem">tops</a>
               <a href="kids/bottoms/" role="menuitem">bottoms</a>
               <a href="kids/sets/" role="menuitem">sets</a>
@@ -215,21 +164,74 @@
               <a href="kids/sleepwear/" role="menuitem">sleepwear</a>
             </div>
             <div class="mega-col">
-              <span class="mega-col-heading">by fiber</span>
+              <span class="mega-col-heading">Shop By Fiber</span>
               <a href="fibers/cotton/" role="menuitem">cotton</a>
               <a href="fibers/linen/" role="menuitem">linen</a>
               <a href="fibers/merino-wool/" role="menuitem">merino wool</a>
               <a href="fibers/cashmere/" role="menuitem">cashmere</a>
-            </div>
-            <div class="mega-col">
-              <span class="mega-col-heading">brands</span>
-              <a href="brands/pact/" role="menuitem">pact</a>
-              <a href="brands/kotn/" role="menuitem">kotn</a>
-              <a href="brands/thought/" role="menuitem">thought</a>
+              <a href="fibers/silk/" role="menuitem">silk</a>
+              <a href="fibers/hemp/" role="menuitem">hemp</a>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- athleisure mega-nav -->
+      <div class="mega-nav-item flex items-center">
+        <a href="browse/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">athleisure</a>
+        <div class="mega-menu">
+          <div class="mega-menu-grid">
+            <div class="mega-col">
+              <span class="mega-col-heading">Shop</span>
+              <a href="browse/" role="menuitem">browse all</a>
+              <a href="women/" role="menuitem">women</a>
+              <a href="men/" role="menuitem">men</a>
+              <a href="kids/" role="menuitem">kids</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">By Brand</span>
+              <a href="brands/pact/" role="menuitem">pact</a>
+              <a href="brands/kotn/" role="menuitem">kotn</a>
+              <a href="brands/finisterre/" role="menuitem">finisterre</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">By Fiber</span>
+              <a href="fibers/cotton/" role="menuitem">cotton</a>
+              <a href="fibers/linen/" role="menuitem">linen</a>
+              <a href="fibers/merino-wool/" role="menuitem">merino wool</a>
+              <a href="fibers/hemp/" role="menuitem">hemp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- intimates mega-nav -->
+      <div class="mega-nav-item flex items-center">
+        <a href="women/sleepwear/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">intimates</a>
+        <div class="mega-menu">
+          <div class="mega-menu-grid">
+            <div class="mega-col">
+              <span class="mega-col-heading">Women's</span>
+              <a href="women/sleepwear/" role="menuitem">sleepwear</a>
+              <a href="women/" role="menuitem">all women's</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">Men's</span>
+              <a href="men/underwear/" role="menuitem">underwear</a>
+              <a href="men/" role="menuitem">all men's</a>
+            </div>
+            <div class="mega-col">
+              <span class="mega-col-heading">By Fiber</span>
+              <a href="fibers/cotton/" role="menuitem">cotton</a>
+              <a href="fibers/merino-wool/" role="menuitem">merino wool</a>
+              <a href="fibers/silk/" role="menuitem">silk</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- home — simple link -->
+      <a href="/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);">home</a>
 
       <!-- fibers mega-nav -->
       <div class="mega-nav-item flex items-center">
@@ -237,102 +239,22 @@
         <div class="mega-menu">
           <div class="mega-menu-grid">
             <div class="mega-col">
-              <span class="mega-col-heading">natural fibers</span>
+              <span class="mega-col-heading">Natural Fibers</span>
               <a href="fibers/" role="menuitem">all fibers</a>
               <a href="fibers/cotton/" role="menuitem">cotton</a>
               <a href="fibers/linen/" role="menuitem">linen</a>
               <a href="fibers/merino-wool/" role="menuitem">merino wool</a>
             </div>
             <div class="mega-col">
-              <span class="mega-col-heading">luxury fibers</span>
+              <span class="mega-col-heading">Luxury Fibers</span>
               <a href="fibers/cashmere/" role="menuitem">cashmere</a>
               <a href="fibers/silk/" role="menuitem">silk</a>
               <a href="fibers/hemp/" role="menuitem">hemp</a>
             </div>
             <div class="mega-col">
-              <span class="mega-col-heading">explore</span>
+              <span class="mega-col-heading">Explore</span>
               <a href="the-standard/" role="menuitem">the loomi standard</a>
               <a href="fibers/" role="menuitem">fiber guide</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- brands mega-nav -->
-      <div class="mega-nav-item flex items-center">
-        <a href="brands/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">brands</a>
-        <div class="mega-menu">
-          <div class="mega-menu-grid">
-            <div class="mega-col">
-              <span class="mega-col-heading">our brands</span>
-              <a href="brands/" role="menuitem">all brands</a>
-              <a href="brands/pact/" role="menuitem">pact</a>
-              <a href="brands/kotn/" role="menuitem">kotn</a>
-              <a href="brands/thought/" role="menuitem">thought</a>
-              <a href="brands/eileen-fisher/" role="menuitem">eileen fisher</a>
-              <a href="brands/finisterre/" role="menuitem">finisterre</a>
-            </div>
-            <div class="mega-col">
-              <span class="mega-col-heading">shop by gender</span>
-              <a href="women/" role="menuitem">women</a>
-              <a href="men/" role="menuitem">men</a>
-              <a href="kids/" role="menuitem">kids</a>
-            </div>
-            <div class="mega-col">
-              <span class="mega-col-heading">by fiber</span>
-              <a href="fibers/cotton/" role="menuitem">cotton</a>
-              <a href="fibers/linen/" role="menuitem">linen</a>
-              <a href="fibers/merino-wool/" role="menuitem">merino wool</a>
-              <a href="fibers/cashmere/" role="menuitem">cashmere</a>
-              <a href="fibers/silk/" role="menuitem">silk</a>
-              <a href="fibers/hemp/" role="menuitem">hemp</a>
-            </div>
-            <div class="mega-col">
-              <span class="mega-col-heading">the standard</span>
-              <a href="the-standard/" role="menuitem">the loomi standard</a>
-              <a href="the-standard/brand-criteria/" role="menuitem">brand criteria</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- the standard mega-nav -->
-      <div class="mega-nav-item flex items-center">
-        <a href="the-standard/" class="nav-link" style="font-size:11px;letter-spacing:0.05em;color:var(--text);" onclick="toggleMega(event,this)">the standard</a>
-        <div class="mega-menu">
-          <div class="mega-menu-grid">
-            <div class="mega-col">
-              <span class="mega-col-heading">the standard</span>
-              <a href="the-standard/" role="menuitem">the loomi standard</a>
-              <a href="the-standard/how-we-verify/" role="menuitem">how we verify</a>
-              <a href="the-standard/fiber-guide/" role="menuitem">fiber guide</a>
-              <a href="the-standard/brand-criteria/" role="menuitem">brand criteria</a>
-            </div>
-            <div class="mega-col">
-              <span class="mega-col-heading">fibers</span>
-              <a href="fibers/" role="menuitem">all fibers</a>
-              <a href="fibers/cotton/" role="menuitem">cotton</a>
-              <a href="fibers/linen/" role="menuitem">linen</a>
-              <a href="fibers/merino-wool/" role="menuitem">merino wool</a>
-              <a href="fibers/cashmere/" role="menuitem">cashmere</a>
-              <a href="fibers/silk/" role="menuitem">silk</a>
-              <a href="fibers/hemp/" role="menuitem">hemp</a>
-            </div>
-            <div class="mega-col">
-              <span class="mega-col-heading">brands</span>
-              <a href="brands/" role="menuitem">all brands</a>
-              <a href="brands/pact/" role="menuitem">pact</a>
-              <a href="brands/kotn/" role="menuitem">kotn</a>
-              <a href="brands/thought/" role="menuitem">thought</a>
-              <a href="brands/eileen-fisher/" role="menuitem">eileen fisher</a>
-              <a href="brands/finisterre/" role="menuitem">finisterre</a>
-            </div>
-            <div class="mega-col">
-              <span class="mega-col-heading">shop</span>
-              <a href="women/" role="menuitem">women</a>
-              <a href="men/" role="menuitem">men</a>
-              <a href="kids/" role="menuitem">kids</a>
-              <a href="new/" role="menuitem">new arrivals</a>
             </div>
           </div>
         </div>
@@ -340,11 +262,10 @@
     </div>
 
     <!-- Mobile hamburger -->
-    <button class="md:hidden flex flex-col gap-[5px] ml-auto mr-2" aria-label="Menu"
-      id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-nav-drawer">
-      <span class="block w-5 h-px" style="background:var(--text);"></span>
-      <span class="block w-5 h-px" style="background:var(--text);"></span>
-      <span class="block w-5 h-px" style="background:var(--text);"></span>
+    <button class="md:hidden mobile-hamburger ml-auto mr-2" aria-label="Menu"
+      id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-nav-drawer"
+      onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
     </button>
 
     <!-- Utility nav: right -->
@@ -366,6 +287,67 @@
       <div id="nav-search-grid" class="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-10"></div>
     </div>
   </div>
+
+  <!-- Mobile nav drawer -->
+  <div id="mobile-nav-drawer" class="mobile-drawer">
+    <div class="mobile-drawer-inner">
+      <div class="mobile-nav-group">
+        <button class="mobile-nav-toggle" onclick="toggleMobileSection(this)">
+          <span>new in</span><span class="mobile-nav-arrow">+</span></button>
+        <div class="mobile-nav-sub">
+          <a href="new/">all new arrivals</a>
+          <a href="women/new-arrivals/">women's new</a>
+          <a href="men/new-arrivals/">men's new</a>
+          <a href="kids/new-arrivals/">kids' new</a>
+        </div>
+      </div>
+      <div class="mobile-nav-group">
+        <button class="mobile-nav-toggle" onclick="toggleMobileSection(this)">
+          <span>clothing</span><span class="mobile-nav-arrow">+</span></button>
+        <div class="mobile-nav-sub">
+          <a href="women/">all women's</a>
+          <a href="women/tops/">tops &amp; tees</a>
+          <a href="women/dresses/">dresses</a>
+          <a href="women/knitwear/">knitwear</a>
+          <a href="men/">all men's</a>
+          <a href="men/t-shirts-tops/">t-shirts &amp; tops</a>
+          <a href="men/shirts/">shirts</a>
+          <a href="kids/">all kids'</a>
+          <a href="kids/tops/">kids' tops</a>
+          <a href="kids/bottoms/">kids' bottoms</a>
+        </div>
+      </div>
+      <a href="browse/" class="mobile-nav-link">athleisure</a>
+      <div class="mobile-nav-group">
+        <button class="mobile-nav-toggle" onclick="toggleMobileSection(this)">
+          <span>intimates</span><span class="mobile-nav-arrow">+</span></button>
+        <div class="mobile-nav-sub">
+          <a href="women/sleepwear/">women's sleepwear</a>
+          <a href="men/underwear/">men's underwear</a>
+        </div>
+      </div>
+      <a href="/" class="mobile-nav-link">home</a>
+      <div class="mobile-nav-group">
+        <button class="mobile-nav-toggle" onclick="toggleMobileSection(this)">
+          <span>fibers</span><span class="mobile-nav-arrow">+</span></button>
+        <div class="mobile-nav-sub">
+          <a href="fibers/">all fibers</a>
+          <a href="fibers/cotton/">cotton</a>
+          <a href="fibers/linen/">linen</a>
+          <a href="fibers/merino-wool/">merino wool</a>
+          <a href="fibers/cashmere/">cashmere</a>
+          <a href="fibers/silk/">silk</a>
+          <a href="fibers/hemp/">hemp</a>
+        </div>
+      </div>
+      <div class="mobile-nav-divider"></div>
+      <a href="search/" class="mobile-nav-link">search</a>
+      <a href="account/" class="mobile-nav-link">account</a>
+      <a href="bag/" class="mobile-nav-link">bag</a>
+    </div>
+  </div>
+
+  <div class="mega-backdrop" id="mega-backdrop"></div>
 
 </nav>
 
@@ -478,6 +460,29 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════
+     VALUES / MISSION TABS
+═══════════════════════════════════════════════ -->
+<section class="values-tabs px-5 md:px-10 py-14" style="border-bottom:1px solid var(--border);border-top:1px solid var(--border);" data-motion="opacity from-bottom">
+  <div class="values-tab-toggles">
+    <button class="values-tab-toggle is-active" onclick="switchValuesTab(0)">our mission</button>
+    <button class="values-tab-toggle" onclick="switchValuesTab(1)">our fibers</button>
+    <button class="values-tab-toggle" onclick="switchValuesTab(2)">the standard</button>
+  </div>
+  <div class="values-tab-panel is-active" style="max-width:640px;">
+    <p class="serif" style="font-size:clamp(1.4rem,2.8vw,2rem);font-weight:400;line-height:1.45;color:var(--text);margin-bottom:20px;">We mandate a minimum of 90% natural fiber in every product on Loomi — allowing only minimal synthetics where absolutely necessary for garment longevity or structural integrity. We verify every listing. You never have to wonder.</p>
+    <a href="the-standard/how-we-verify/" class="cta-link">how we verify →</a>
+  </div>
+  <div class="values-tab-panel" style="max-width:640px;">
+    <p class="serif" style="font-size:clamp(1.4rem,2.8vw,2rem);font-weight:400;line-height:1.45;color:var(--text);margin-bottom:20px;">Cotton, linen, merino wool, cashmere, silk, and hemp — six natural fibers, each with a story. Every product page shows you exactly what you're wearing, fiber by fiber.</p>
+    <a href="fibers/" class="cta-link">explore fibers →</a>
+  </div>
+  <div class="values-tab-panel" style="max-width:640px;">
+    <p class="serif" style="font-size:clamp(1.4rem,2.8vw,2rem);font-weight:400;line-height:1.45;color:var(--text);margin-bottom:20px;">The Loomi Pick badge marks brands with independent third-party certification — GOTS, B-Corp, Bluesign, or Fair Trade — on top of our 90% threshold. Not every brand earns it.</p>
+    <a href="brands/certified/" class="cta-link">explore the loomi picks →</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
      NATURAL FIBERS CAROUSEL
 ═══════════════════════════════════════════════ -->
 <section class="py-14 px-5 md:px-10">
@@ -568,6 +573,37 @@
   <div class="text-center mt-10">
     <a href="#" class="nav-link" style="font-size:10px;letter-spacing:0.1em;color:var(--text-muted);text-decoration:underline;text-underline-offset:3px;">show more</a>
   </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     EDITORIAL CALLOUTS — TEXT OVER IMAGE
+═══════════════════════════════════════════════ -->
+<section class="grid grid-cols-1 md:grid-cols-2 overflow-hidden">
+
+  <!-- Tile 1: The Fiber Edit -->
+  <div class="component-overlay" style="min-height:480px;">
+    <img src="images/the Linen Collection.webp" alt="The Linen Collection"
+      class="w-full h-full object-cover" style="position:absolute;inset:0;" loading="lazy" />
+    <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(0,0,0,0.38) 0%,transparent 55%);"></div>
+    <div class="absolute bottom-10 left-6" style="z-index:3;">
+      <h2 class="campaign-title" style="font-size:clamp(2rem,4vw,4rem);">The Fiber<br>Edit.</h2>
+      <a href="fibers/linen/" class="overlay-cta-link">shop linen</a>
+    </div>
+    <a href="fibers/linen/" class="overlay-full-link" aria-label="Shop The Fiber Edit" tabindex="-1"></a>
+  </div>
+
+  <!-- Tile 2: Winter Naturals -->
+  <div class="component-overlay" style="min-height:480px;">
+    <img src="images/Merino Wool Fabric Texture.webp" alt="Merino Wool"
+      class="w-full h-full object-cover" style="position:absolute;inset:0;" loading="lazy" />
+    <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(0,0,0,0.38) 0%,transparent 55%);"></div>
+    <div class="absolute bottom-10 left-6" style="z-index:3;">
+      <h2 class="campaign-title" style="font-size:clamp(2rem,4vw,4rem);">Winter<br>Naturals.</h2>
+      <a href="fibers/merino-wool/" class="overlay-cta-link">shop merino</a>
+    </div>
+    <a href="fibers/merino-wool/" class="overlay-full-link" aria-label="Shop Winter Naturals" tabindex="-1"></a>
+  </div>
+
 </section>
 
 <!-- ═══════════════════════════════════════════════
@@ -752,12 +788,23 @@
   window.LOOMI_ROOT = '';
   window.PAGE_CONFIG = { type: 'home' };
 </script>
-<script src="js/data.js?v=5"></script>
-<script src="js/components.js?v=5"></script>
-<script src="js/plp.js?v=5"></script>
-<script src="js/page.js?v=5"></script>
+<script src="js/data.js?v=8"></script>
+<script src="js/components.js?v=8"></script>
+<script src="js/plp.js?v=8"></script>
+<script src="js/page.js?v=8"></script>
 
 <script>
+  function switchValuesTab(n) {
+    var panels = document.querySelectorAll('.values-tab-panel');
+    var toggles = document.querySelectorAll('.values-tab-toggle');
+    panels.forEach(function(p, i) {
+      p.classList.toggle('is-active', i === n);
+    });
+    toggles.forEach(function(t, i) {
+      t.classList.toggle('is-active', i === n);
+    });
+  }
+
   function slide(id, dir) {
     const el = document.getElementById(id);
     if (!el) return;

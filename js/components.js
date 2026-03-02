@@ -92,25 +92,48 @@
   /* ─── NAV ─────────────────────────────────────────────────────── */
   function renderNav(opts) {
     var r = root();
-    /* Auto-detect active section from the current URL path.
-       Falls back to explicit opts.activePath for edge cases. */
-    var active = (opts && opts.activePath) || (function () {
-      try {
-        var parts = window.location.pathname.replace(/^\//, '').split('/');
-        return parts[0] ? parts[0] + '/' : '';
-      } catch (e) { return ''; }
+
+    /* Resolve active section from URL — handles multi-level paths */
+    var rawPath = (opts && opts.activePath) || (function () {
+      try { return window.location.pathname.replace(/^\//, ''); }
+      catch (e) { return ''; }
+    })();
+    var seg1 = rawPath.split('/')[0] + '/';
+    var seg2 = (rawPath.split('/')[1] || '') + '/';
+
+    var section = (function () {
+      /* Intimates: sleepwear or underwear sub-pages */
+      if (seg2 === 'sleepwear/' || seg2 === 'underwear/') return 'intimates';
+      /* Featured: Loomi Pick certified brands */
+      if (seg1 === 'brands/' && seg2 === 'certified/') return 'featured';
+      /* Clothing consolidates all gender sections */
+      if (seg1 === 'women/' || seg1 === 'men/' || seg1 === 'kids/') return 'clothing';
+      if (seg1 === 'new/')       return 'new-in';
+      if (seg1 === 'browse/')    return 'athleisure';
+      if (seg1 === 'fibers/')    return 'fibers';
+      return '';
     })();
 
     function navHref(path) { return r + path; }
-    function isActive(path) {
-      return !!(active && active !== '' && active === path);
-    }
-    function activeClass(path) {
-      return isActive(path) ? ' is-active' : '';
-    }
+    function activeClass(sec) { return section === sec ? ' is-active' : ''; }
+    var linkStyle = ' style="font-size:11px;letter-spacing:0.05em;color:var(--text);"';
 
     return '<a href="#loomi-main" class="skip-to-main">Skip to main content</a>' +
       '<nav class="sticky top-0 z-50" style="background:var(--bg);">' +
+
+      /* ── Row 1: Promo bar ── */
+      '<div class="promo-bar" id="loomi-promo-bar">' +
+      '<span id="loomi-promo-msg">Free shipping on orders $200+</span>' +
+      '</div>' +
+
+      /* ── Row 2: Site nav top (MATE-style) — desktop only via CSS @media ── */
+      '<div class="site-nav-top">' +
+      '<a href="' + navHref('browse/') + '">shop</a>' +
+      '<a href="' + navHref('blog/') + '">read</a>' +
+      '<a href="' + navHref('the-standard/') + '">our promise</a>' +
+      '</div>' +
+
+      /* ── Row 3: Main nav ── */
       '<div class="flex items-center h-11 px-5 gap-7">' +
 
       '<a href="' + navHref('') + '" class="nav-link flex-shrink-0 serif"' +
@@ -118,13 +141,12 @@
 
       '<div class="hidden md:flex items-center gap-6 flex-1">' +
 
-      /* New mega */
+      /* ── New In ── */
       '<div class="mega-nav-item flex items-center">' +
-      '<a href="' + navHref('new/') + '" class="nav-link' + activeClass('new/') + '"' +
-      ' style="font-size:11px;letter-spacing:0.05em;color:var(--text);"' +
-      ' aria-haspopup="true" aria-expanded="false">new</a>' +
+      '<a href="' + navHref('new/') + '" class="nav-link' + activeClass('new-in') + '"' +
+      linkStyle + ' aria-haspopup="true" aria-expanded="false">new in</a>' +
       '<div class="mega-menu" role="menu"><div class="mega-menu-grid">' +
-      '<div class="mega-col"><span class="mega-col-heading">New In</span>' +
+      '<div class="mega-col"><span class="mega-col-heading">New Arrivals</span>' +
       '<a href="' + navHref('new/') + '" role="menuitem">all new arrivals</a>' +
       '<a href="' + navHref('women/new-arrivals/') + '" role="menuitem">women\'s new</a>' +
       '<a href="' + navHref('men/new-arrivals/') + '" role="menuitem">men\'s new</a>' +
@@ -145,99 +167,86 @@
       '<a href="' + navHref('brands/finisterre/') + '" role="menuitem">finisterre</a>' +
       '</div></div></div></div>' +
 
-      /* Women mega */
+      /* ── Clothing ── */
       '<div class="mega-nav-item flex items-center">' +
-      '<a href="' + navHref('women/') + '" class="nav-link' + activeClass('women/') + '"' +
-      ' style="font-size:11px;letter-spacing:0.05em;color:var(--text);"' +
-      ' aria-haspopup="true" aria-expanded="false">women</a>' +
+      '<a href="' + navHref('women/') + '" class="nav-link' + activeClass('clothing') + '"' +
+      linkStyle + ' aria-haspopup="true" aria-expanded="false">clothing</a>' +
       '<div class="mega-menu" role="menu"><div class="mega-menu-grid">' +
       '<div class="mega-col"><span class="mega-col-heading">Women\'s</span>' +
-      '<a href="' + navHref('women/new-arrivals/') + '" role="menuitem">new arrivals</a>' +
-      '<a href="' + navHref('women/best-sellers/') + '" role="menuitem">best sellers</a>' +
-      '<a href="' + navHref('women/sale/') + '" role="menuitem">sale</a></div>' +
-      '<div class="mega-col"><span class="mega-col-heading">Clothing</span>' +
+      '<a href="' + navHref('women/') + '" role="menuitem">all women\'s</a>' +
       '<a href="' + navHref('women/tops/') + '" role="menuitem">tops &amp; tees</a>' +
       '<a href="' + navHref('women/dresses/') + '" role="menuitem">dresses</a>' +
       '<a href="' + navHref('women/trousers/') + '" role="menuitem">trousers</a>' +
       '<a href="' + navHref('women/knitwear/') + '" role="menuitem">knitwear</a>' +
-      '<a href="' + navHref('women/outerwear/') + '" role="menuitem">outerwear</a>' +
-      '<a href="' + navHref('women/sleepwear/') + '" role="menuitem">sleepwear</a></div>' +
-      '<div class="mega-col"><span class="mega-col-heading">By Fiber</span>' +
-      '<a href="' + navHref('fibers/cotton/') + '" role="menuitem">cotton</a>' +
-      '<a href="' + navHref('fibers/linen/') + '" role="menuitem">linen</a>' +
-      '<a href="' + navHref('fibers/merino-wool/') + '" role="menuitem">merino wool</a>' +
-      '<a href="' + navHref('fibers/cashmere/') + '" role="menuitem">cashmere</a>' +
-      '<a href="' + navHref('fibers/silk/') + '" role="menuitem">silk</a>' +
-      '<a href="' + navHref('fibers/hemp/') + '" role="menuitem">hemp</a></div>' +
-      '<div class="mega-col"><span class="mega-col-heading">Brands</span>' +
-      '<a href="' + navHref('brands/pact/') + '" role="menuitem">pact</a>' +
-      '<a href="' + navHref('brands/kotn/') + '" role="menuitem">kotn</a>' +
-      '<a href="' + navHref('brands/thought/') + '" role="menuitem">thought</a>' +
-      '<a href="' + navHref('brands/eileen-fisher/') + '" role="menuitem">eileen fisher</a>' +
-      '</div></div></div></div>' +
-
-      /* Men mega */
-      '<div class="mega-nav-item flex items-center">' +
-      '<a href="' + navHref('men/') + '" class="nav-link' + activeClass('men/') + '"' +
-      ' style="font-size:11px;letter-spacing:0.05em;color:var(--text);"' +
-      ' aria-haspopup="true" aria-expanded="false">men</a>' +
-      '<div class="mega-menu" role="menu"><div class="mega-menu-grid">' +
+      '<a href="' + navHref('women/outerwear/') + '" role="menuitem">outerwear</a></div>' +
       '<div class="mega-col"><span class="mega-col-heading">Men\'s</span>' +
-      '<a href="' + navHref('men/new-arrivals/') + '" role="menuitem">new arrivals</a>' +
-      '<a href="' + navHref('men/best-sellers/') + '" role="menuitem">best sellers</a>' +
-      '<a href="' + navHref('men/sale/') + '" role="menuitem">sale</a></div>' +
-      '<div class="mega-col"><span class="mega-col-heading">Clothing</span>' +
+      '<a href="' + navHref('men/') + '" role="menuitem">all men\'s</a>' +
       '<a href="' + navHref('men/t-shirts-tops/') + '" role="menuitem">t-shirts &amp; tops</a>' +
       '<a href="' + navHref('men/shirts/') + '" role="menuitem">shirts</a>' +
       '<a href="' + navHref('men/trousers/') + '" role="menuitem">trousers</a>' +
       '<a href="' + navHref('men/knitwear/') + '" role="menuitem">knitwear</a>' +
-      '<a href="' + navHref('men/outerwear/') + '" role="menuitem">outerwear</a>' +
-      '<a href="' + navHref('men/underwear/') + '" role="menuitem">underwear</a></div>' +
-      '<div class="mega-col"><span class="mega-col-heading">By Fiber</span>' +
-      '<a href="' + navHref('fibers/cotton/') + '" role="menuitem">cotton</a>' +
-      '<a href="' + navHref('fibers/linen/') + '" role="menuitem">linen</a>' +
-      '<a href="' + navHref('fibers/merino-wool/') + '" role="menuitem">merino wool</a>' +
-      '<a href="' + navHref('fibers/cashmere/') + '" role="menuitem">cashmere</a>' +
-      '<a href="' + navHref('fibers/hemp/') + '" role="menuitem">hemp</a></div>' +
-      '<div class="mega-col"><span class="mega-col-heading">Brands</span>' +
-      '<a href="' + navHref('brands/pact/') + '" role="menuitem">pact</a>' +
-      '<a href="' + navHref('brands/kotn/') + '" role="menuitem">kotn</a>' +
-      '<a href="' + navHref('brands/thought/') + '" role="menuitem">thought</a>' +
-      '<a href="' + navHref('brands/finisterre/') + '" role="menuitem">finisterre</a>' +
-      '</div></div></div></div>' +
-
-      /* Kids mega */
-      '<div class="mega-nav-item flex items-center">' +
-      '<a href="' + navHref('kids/') + '" class="nav-link' + activeClass('kids/') + '"' +
-      ' style="font-size:11px;letter-spacing:0.05em;color:var(--text);"' +
-      ' aria-haspopup="true" aria-expanded="false">kids</a>' +
-      '<div class="mega-menu" role="menu"><div class="mega-menu-grid">' +
+      '<a href="' + navHref('men/outerwear/') + '" role="menuitem">outerwear</a></div>' +
       '<div class="mega-col"><span class="mega-col-heading">Kids\'</span>' +
-      '<a href="' + navHref('kids/new-arrivals/') + '" role="menuitem">new arrivals</a>' +
-      '<a href="' + navHref('kids/best-sellers/') + '" role="menuitem">best sellers</a>' +
-      '<a href="' + navHref('kids/sale/') + '" role="menuitem">sale</a></div>' +
-      '<div class="mega-col"><span class="mega-col-heading">Clothing</span>' +
+      '<a href="' + navHref('kids/') + '" role="menuitem">all kids\'</a>' +
       '<a href="' + navHref('kids/tops/') + '" role="menuitem">tops</a>' +
       '<a href="' + navHref('kids/bottoms/') + '" role="menuitem">bottoms</a>' +
       '<a href="' + navHref('kids/sets/') + '" role="menuitem">sets</a>' +
       '<a href="' + navHref('kids/outerwear/') + '" role="menuitem">outerwear</a>' +
       '<a href="' + navHref('kids/sleepwear/') + '" role="menuitem">sleepwear</a></div>' +
+      '<div class="mega-col"><span class="mega-col-heading">Shop By Fiber</span>' +
+      '<a href="' + navHref('fibers/cotton/') + '" role="menuitem">cotton</a>' +
+      '<a href="' + navHref('fibers/linen/') + '" role="menuitem">linen</a>' +
+      '<a href="' + navHref('fibers/merino-wool/') + '" role="menuitem">merino wool</a>' +
+      '<a href="' + navHref('fibers/cashmere/') + '" role="menuitem">cashmere</a>' +
+      '<a href="' + navHref('fibers/silk/') + '" role="menuitem">silk</a>' +
+      '<a href="' + navHref('fibers/hemp/') + '" role="menuitem">hemp</a>' +
+      '</div></div></div></div>' +
+
+      /* ── Athleisure ── */
+      '<div class="mega-nav-item flex items-center">' +
+      '<a href="' + navHref('browse/') + '" class="nav-link' + activeClass('athleisure') + '"' +
+      linkStyle + ' aria-haspopup="true" aria-expanded="false">athleisure</a>' +
+      '<div class="mega-menu" role="menu"><div class="mega-menu-grid">' +
+      '<div class="mega-col"><span class="mega-col-heading">Shop</span>' +
+      '<a href="' + navHref('browse/') + '" role="menuitem">browse all</a>' +
+      '<a href="' + navHref('women/') + '" role="menuitem">women</a>' +
+      '<a href="' + navHref('men/') + '" role="menuitem">men</a>' +
+      '<a href="' + navHref('kids/') + '" role="menuitem">kids</a></div>' +
+      '<div class="mega-col"><span class="mega-col-heading">By Brand</span>' +
+      '<a href="' + navHref('brands/pact/') + '" role="menuitem">pact</a>' +
+      '<a href="' + navHref('brands/kotn/') + '" role="menuitem">kotn</a>' +
+      '<a href="' + navHref('brands/finisterre/') + '" role="menuitem">finisterre</a></div>' +
       '<div class="mega-col"><span class="mega-col-heading">By Fiber</span>' +
       '<a href="' + navHref('fibers/cotton/') + '" role="menuitem">cotton</a>' +
       '<a href="' + navHref('fibers/linen/') + '" role="menuitem">linen</a>' +
       '<a href="' + navHref('fibers/merino-wool/') + '" role="menuitem">merino wool</a>' +
-      '<a href="' + navHref('fibers/cashmere/') + '" role="menuitem">cashmere</a></div>' +
-      '<div class="mega-col"><span class="mega-col-heading">Brands</span>' +
-      '<a href="' + navHref('brands/') + '" role="menuitem">all brands</a>' +
-      '<a href="' + navHref('brands/pact/') + '" role="menuitem">pact</a>' +
-      '<a href="' + navHref('brands/kotn/') + '" role="menuitem">kotn</a>' +
-      '<a href="' + navHref('brands/thought/') + '" role="menuitem">thought</a>' +
+      '<a href="' + navHref('fibers/hemp/') + '" role="menuitem">hemp</a>' +
       '</div></div></div></div>' +
 
+      /* ── Intimates ── */
       '<div class="mega-nav-item flex items-center">' +
-      '<a href="' + navHref('fibers/') + '" class="nav-link' + activeClass('fibers/') + '"' +
-      ' style="font-size:11px;letter-spacing:0.05em;color:var(--text);"' +
-      ' aria-haspopup="true" aria-expanded="false">fibers</a>' +
+      '<a href="' + navHref('women/sleepwear/') + '" class="nav-link' + activeClass('intimates') + '"' +
+      linkStyle + ' aria-haspopup="true" aria-expanded="false">intimates</a>' +
+      '<div class="mega-menu" role="menu"><div class="mega-menu-grid">' +
+      '<div class="mega-col"><span class="mega-col-heading">Women\'s</span>' +
+      '<a href="' + navHref('women/sleepwear/') + '" role="menuitem">sleepwear</a>' +
+      '<a href="' + navHref('women/') + '" role="menuitem">all women\'s</a></div>' +
+      '<div class="mega-col"><span class="mega-col-heading">Men\'s</span>' +
+      '<a href="' + navHref('men/underwear/') + '" role="menuitem">underwear</a>' +
+      '<a href="' + navHref('men/') + '" role="menuitem">all men\'s</a></div>' +
+      '<div class="mega-col"><span class="mega-col-heading">By Fiber</span>' +
+      '<a href="' + navHref('fibers/cotton/') + '" role="menuitem">cotton</a>' +
+      '<a href="' + navHref('fibers/merino-wool/') + '" role="menuitem">merino wool</a>' +
+      '<a href="' + navHref('fibers/silk/') + '" role="menuitem">silk</a>' +
+      '</div></div></div></div>' +
+
+      /* ── Home (simple link, no mega) ── */
+      '<a href="' + navHref('') + '" class="nav-link"' + linkStyle + '>home</a>' +
+
+      /* ── Fibers ── */
+      '<div class="mega-nav-item flex items-center">' +
+      '<a href="' + navHref('fibers/') + '" class="nav-link' + activeClass('fibers') + '"' +
+      linkStyle + ' aria-haspopup="true" aria-expanded="false">fibers</a>' +
       '<div class="mega-menu" role="menu"><div class="mega-menu-grid">' +
       '<div class="mega-col"><span class="mega-col-heading">Natural Fibers</span>' +
       '<a href="' + navHref('fibers/') + '" role="menuitem">all fibers</a>' +
@@ -252,68 +261,6 @@
       '<a href="' + navHref('the-standard/') + '" role="menuitem">the loomi standard</a>' +
       '<a href="' + navHref('fibers/') + '" role="menuitem">fiber guide</a></div>' +
       '</div></div></div>' +
-
-      /* Brands mega */
-      '<div class="mega-nav-item flex items-center">' +
-      '<a href="' + navHref('brands/') + '" class="nav-link' + activeClass('brands/') + '"' +
-      ' style="font-size:11px;letter-spacing:0.05em;color:var(--text);"' +
-      ' aria-haspopup="true" aria-expanded="false">brands</a>' +
-      '<div class="mega-menu" role="menu"><div class="mega-menu-grid">' +
-      '<div class="mega-col"><span class="mega-col-heading">Our Brands</span>' +
-      '<a href="' + navHref('brands/') + '" role="menuitem">all brands</a>' +
-      '<a href="' + navHref('brands/pact/') + '" role="menuitem">pact</a>' +
-      '<a href="' + navHref('brands/kotn/') + '" role="menuitem">kotn</a>' +
-      '<a href="' + navHref('brands/thought/') + '" role="menuitem">thought</a>' +
-      '<a href="' + navHref('brands/eileen-fisher/') + '" role="menuitem">eileen fisher</a>' +
-      '<a href="' + navHref('brands/finisterre/') + '" role="menuitem">finisterre</a></div>' +
-      '<div class="mega-col"><span class="mega-col-heading">Shop By Gender</span>' +
-      '<a href="' + navHref('women/') + '" role="menuitem">women</a>' +
-      '<a href="' + navHref('men/') + '" role="menuitem">men</a>' +
-      '<a href="' + navHref('kids/') + '" role="menuitem">kids</a></div>' +
-      '<div class="mega-col"><span class="mega-col-heading">Our Standards</span>' +
-      '<a href="' + navHref('brands/certified/') + '" role="menuitem" style="color:var(--green);">Loomi Pick Brands</a>' +
-      '<a href="' + navHref('the-standard/') + '" role="menuitem">the loomi standard</a>' +
-      '<a href="' + navHref('the-standard/brand-criteria/') + '" role="menuitem">brand criteria</a>' +
-      '<a href="' + navHref('the-standard/how-we-verify/') + '" role="menuitem">how we verify</a>' +
-      '<a href="' + navHref('fibers/') + '" role="menuitem">fiber guide</a></div>' +
-      '<div class="mega-col"><span class="mega-col-heading">Shop</span>' +
-      '<a href="' + navHref('women/') + '" role="menuitem">women</a>' +
-      '<a href="' + navHref('men/') + '" role="menuitem">men</a>' +
-      '<a href="' + navHref('kids/') + '" role="menuitem">kids</a>' +
-      '</div></div></div></div>' +
-
-      /* The Standard mega */
-      '<div class="mega-nav-item flex items-center">' +
-      '<a href="' + navHref('the-standard/') + '" class="nav-link' + activeClass('the-standard/') + '"' +
-      ' style="font-size:11px;letter-spacing:0.05em;color:var(--text);"' +
-      ' aria-haspopup="true" aria-expanded="false">the standard</a>' +
-      '<div class="mega-menu" role="menu"><div class="mega-menu-grid">' +
-      '<div class="mega-col"><span class="mega-col-heading">The Standard</span>' +
-      '<a href="' + navHref('the-standard/') + '" role="menuitem">the loomi standard</a>' +
-      '<a href="' + navHref('the-standard/how-we-verify/') + '" role="menuitem">how we verify</a>' +
-      '<a href="' + navHref('the-standard/fiber-guide/') + '" role="menuitem">fiber guide</a>' +
-      '<a href="' + navHref('the-standard/brand-criteria/') + '" role="menuitem">brand criteria</a></div>' +
-      '<div class="mega-col"><span class="mega-col-heading">Fibers</span>' +
-      '<a href="' + navHref('fibers/') + '" role="menuitem">all fibers</a>' +
-      '<a href="' + navHref('fibers/cotton/') + '" role="menuitem">cotton</a>' +
-      '<a href="' + navHref('fibers/linen/') + '" role="menuitem">linen</a>' +
-      '<a href="' + navHref('fibers/merino-wool/') + '" role="menuitem">merino wool</a>' +
-      '<a href="' + navHref('fibers/cashmere/') + '" role="menuitem">cashmere</a>' +
-      '<a href="' + navHref('fibers/silk/') + '" role="menuitem">silk</a>' +
-      '<a href="' + navHref('fibers/hemp/') + '" role="menuitem">hemp</a></div>' +
-      '<div class="mega-col"><span class="mega-col-heading">Certifications</span>' +
-      '<a href="' + navHref('the-standard/') + '" role="menuitem">GOTS organic</a>' +
-      '<a href="' + navHref('the-standard/') + '" role="menuitem">Bluesign</a>' +
-      '<a href="' + navHref('the-standard/') + '" role="menuitem">Fair Trade</a>' +
-      '<a href="' + navHref('the-standard/') + '" role="menuitem">B-Corp</a>' +
-      '<a href="' + navHref('the-standard/') + '" role="menuitem">Responsible Wool</a></div>' +
-      '<div class="mega-col"><span class="mega-col-heading">Shop</span>' +
-      '<a href="' + navHref('women/') + '" role="menuitem">women</a>' +
-      '<a href="' + navHref('men/') + '" role="menuitem">men</a>' +
-      '<a href="' + navHref('kids/') + '" role="menuitem">kids</a>' +
-      '<a href="' + navHref('new/') + '" role="menuitem">new arrivals</a>' +
-      '<a href="' + navHref('brands/') + '" role="menuitem">all brands</a>' +
-      '</div></div></div></div>' +
 
       '</div>' + /* end primary nav */
 
@@ -344,7 +291,7 @@
 
       '<div class="mobile-nav-group">' +
       '<button class="mobile-nav-toggle" onclick="toggleMobileSection(this)">' +
-      '<span>new</span><span class="mobile-nav-arrow">+</span></button>' +
+      '<span>new in</span><span class="mobile-nav-arrow">+</span></button>' +
       '<div class="mobile-nav-sub">' +
       '<a href="' + navHref('new/') + '">all new arrivals</a>' +
       '<a href="' + navHref('women/new-arrivals/') + '">women\'s new</a>' +
@@ -354,39 +301,46 @@
 
       '<div class="mobile-nav-group">' +
       '<button class="mobile-nav-toggle" onclick="toggleMobileSection(this)">' +
-      '<span>women</span><span class="mobile-nav-arrow">+</span></button>' +
+      '<span>clothing</span><span class="mobile-nav-arrow">+</span></button>' +
       '<div class="mobile-nav-sub">' +
       '<a href="' + navHref('women/') + '">all women\'s</a>' +
-      '<a href="' + navHref('women/tops/') + '">tops & tees</a>' +
+      '<a href="' + navHref('women/tops/') + '">tops &amp; tees</a>' +
       '<a href="' + navHref('women/dresses/') + '">dresses</a>' +
       '<a href="' + navHref('women/knitwear/') + '">knitwear</a>' +
       '<a href="' + navHref('women/outerwear/') + '">outerwear</a>' +
-      '</div></div>' +
-
-      '<div class="mobile-nav-group">' +
-      '<button class="mobile-nav-toggle" onclick="toggleMobileSection(this)">' +
-      '<span>men</span><span class="mobile-nav-arrow">+</span></button>' +
-      '<div class="mobile-nav-sub">' +
       '<a href="' + navHref('men/') + '">all men\'s</a>' +
-      '<a href="' + navHref('men/t-shirts-tops/') + '">t-shirts & tops</a>' +
+      '<a href="' + navHref('men/t-shirts-tops/') + '">t-shirts &amp; tops</a>' +
       '<a href="' + navHref('men/shirts/') + '">shirts</a>' +
       '<a href="' + navHref('men/knitwear/') + '">knitwear</a>' +
-      '<a href="' + navHref('men/outerwear/') + '">outerwear</a>' +
+      '<a href="' + navHref('kids/') + '">all kids\'</a>' +
+      '<a href="' + navHref('kids/tops/') + '">kids\' tops</a>' +
+      '<a href="' + navHref('kids/bottoms/') + '">kids\' bottoms</a>' +
       '</div></div>' +
+
+      '<a href="' + navHref('browse/') + '" class="mobile-nav-link">athleisure</a>' +
 
       '<div class="mobile-nav-group">' +
       '<button class="mobile-nav-toggle" onclick="toggleMobileSection(this)">' +
-      '<span>kids</span><span class="mobile-nav-arrow">+</span></button>' +
+      '<span>intimates</span><span class="mobile-nav-arrow">+</span></button>' +
       '<div class="mobile-nav-sub">' +
-      '<a href="' + navHref('kids/') + '">all kids\'</a>' +
-      '<a href="' + navHref('kids/tops/') + '">tops</a>' +
-      '<a href="' + navHref('kids/bottoms/') + '">bottoms</a>' +
-      '<a href="' + navHref('kids/outerwear/') + '">outerwear</a>' +
+      '<a href="' + navHref('women/sleepwear/') + '">women\'s sleepwear</a>' +
+      '<a href="' + navHref('men/underwear/') + '">men\'s underwear</a>' +
       '</div></div>' +
 
-      '<a href="' + navHref('fibers/') + '" class="mobile-nav-link">fibers</a>' +
-      '<a href="' + navHref('brands/') + '" class="mobile-nav-link">brands</a>' +
-      '<a href="' + navHref('the-standard/') + '" class="mobile-nav-link">the standard</a>' +
+      '<a href="' + navHref('') + '" class="mobile-nav-link">home</a>' +
+
+      '<div class="mobile-nav-group">' +
+      '<button class="mobile-nav-toggle" onclick="toggleMobileSection(this)">' +
+      '<span>fibers</span><span class="mobile-nav-arrow">+</span></button>' +
+      '<div class="mobile-nav-sub">' +
+      '<a href="' + navHref('fibers/') + '">all fibers</a>' +
+      '<a href="' + navHref('fibers/cotton/') + '">cotton</a>' +
+      '<a href="' + navHref('fibers/linen/') + '">linen</a>' +
+      '<a href="' + navHref('fibers/merino-wool/') + '">merino wool</a>' +
+      '<a href="' + navHref('fibers/cashmere/') + '">cashmere</a>' +
+      '<a href="' + navHref('fibers/silk/') + '">silk</a>' +
+      '<a href="' + navHref('fibers/hemp/') + '">hemp</a>' +
+      '</div></div>' +
 
       '<div class="mobile-nav-divider"></div>' +
       '<a href="' + navHref('search/') + '" class="mobile-nav-link">search</a>' +
@@ -436,7 +390,7 @@
       '<div class="footer-acc-item"><button class="footer-acc-btn" onclick="toggleAcc(this)">the loomi standard<span style="font-size:16px;line-height:1;">+</span></button>' +
       '<div class="footer-acc-content">' +
       '<a href="' + r + 'the-standard/how-we-verify/">what we verify</a>' +
-      '<a href="' + r + 'the-standard/">the 90% rule</a>' +
+      '<a href="' + r + 'the-standard/">the loomi standard</a>' +
       '<a href="' + r + 'the-standard/fiber-guide/">fiber guide</a>' +
       '</div></div>' +
       '<div class="footer-acc-item"><button class="footer-acc-btn" onclick="toggleAcc(this)">how it works<span style="font-size:16px;line-height:1;">+</span></button>' +
@@ -521,6 +475,36 @@
     renderBreadcrumb: renderBreadcrumb
   };
 
+})();
+
+/* ─── PROMO BAR ROTATION ──────────────────────────────────────────
+   Called once after nav is injected into the DOM.
+─────────────────────────────────────────────────────────────────── */
+(function () {
+  var msgs = [
+    'Free shipping on orders $200+',
+    'New arrivals every week',
+    '90% natural fibers · always'
+  ];
+  var i = 0;
+  function startPromoRotation() {
+    var el = document.getElementById('loomi-promo-msg');
+    if (!el) return;
+    setInterval(function () {
+      i = (i + 1) % msgs.length;
+      el.style.opacity = '0';
+      setTimeout(function () {
+        el.textContent = msgs[i];
+        el.style.opacity = '1';
+      }, 300);
+    }, 4000);
+  }
+  /* Run after DOM is ready */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startPromoRotation);
+  } else {
+    startPromoRotation();
+  }
 })();
 
 /* ─── NAV SEARCH ──────────────────────────────────────────────────
